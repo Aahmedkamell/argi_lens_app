@@ -1,7 +1,8 @@
+import 'package:agre_lens_app/modules/Boardina/boardina1_screen.dart';
 import 'package:flutter/material.dart';
-import 'Boardina3.dart';
+//import '../auth/login_screen.dart';
 
-class Boardina2Screen extends StatelessWidget {
+class Boardina3Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +10,7 @@ class Boardina2Screen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/boardina2_bg.png',
+              'assets/images/boardina3_bg.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -17,7 +18,12 @@ class Boardina2Screen extends StatelessWidget {
             top: 50,
             right: 20,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    //navigate to login **
+                    MaterialPageRoute(builder: (context) => Boardina1Screen()));
+              },
               child: Text(
                 'Skip',
                 style: TextStyle(fontSize: 16, color: Colors.black),
@@ -32,7 +38,7 @@ class Boardina2Screen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Daily care for your plants.",
+                  "Know the season your plants love.",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -41,7 +47,7 @@ class Boardina2Screen extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Get detailed information about the plant you see.",
+                  "Set up reminders and keep your plant healthy and strong!",
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ],
@@ -55,7 +61,8 @@ class Boardina2Screen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Boardina3Screen()),
+// المفروض هنا يروح على login يس دي مؤقتا يعني
+                  MaterialPageRoute(builder: (context) => Boardina1Screen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -63,7 +70,7 @@ class Boardina2Screen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 15),
               ),
               child: Text(
-                "Next",
+                "Get Started",
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),

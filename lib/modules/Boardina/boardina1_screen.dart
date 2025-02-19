@@ -1,6 +1,6 @@
-import 'package:agre_lens_app/modules/Boardina/Boardina2.dart';
+import 'package:agre_lens_app/modules/Boardina/Boardina2_screen.dart';
 import 'package:flutter/material.dart';
-import 'Boardina2.dart';
+import 'Boardina2_screen.dart';
 
 class Boardina1Screen extends StatelessWidget {
   @override
@@ -18,7 +18,10 @@ class Boardina1Screen extends StatelessWidget {
             top: 50,
             right: 20,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Boardina2Screen()));
+              },
               child: Text(
                 'Skip',
                 style: TextStyle(fontSize: 16, color: Colors.black),
