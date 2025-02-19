@@ -1,45 +1,57 @@
-import 'dart:async';
+import 'package:agre_lens_app/modules/Boardina/Boardina1_screen.dart';
 import 'package:flutter/material.dart';
-import '../home/home_screen.dart';
+import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 2000), () {
-      Navigator.pushReplacement(
-        context,
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_controller);
+
+    _controller.forward();
+
+    Timer(Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => HomeScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            var curve = Curves.easeOut;
-            var tween = Tween<double>(begin: 0.0, end: 1.0).chain(
-              CurveTween(curve: curve),
-            );
-            return FadeTransition(
-              opacity: animation.drive(tween),
-              child: child,
-            );
+          transitionDuration: Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => Boardina1Screen(),
+          transitionsBuilder: (_, animation, __, child) {
+            return FadeTransition(opacity: animation, child: child);
           },
-          transitionDuration: Duration(milliseconds: 300),
         ),
       );
     });
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset(
-          'assets/images/logo.png',
-          width: 150,
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Image.asset('assets/images/logo.png', width: 150),
         ),
       ),
     );
