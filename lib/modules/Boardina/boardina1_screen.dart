@@ -1,6 +1,6 @@
-import 'package:agre_lens_app/modules/Boardina/Boardina2.dart';
 import 'package:flutter/material.dart';
-import 'Boardina2.dart';
+
+import 'Boardina2_screen.dart';
 
 class Boardina1Screen extends StatelessWidget {
   @override
