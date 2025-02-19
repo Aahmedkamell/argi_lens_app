@@ -1,5 +1,6 @@
+import 'package:agre_lens_app/modules/Boardina/Boardina2.dart';
 import 'package:flutter/material.dart';
-
+import 'Boardina2.dart';
 
 class Boardina1Screen extends StatelessWidget {
   @override
@@ -7,27 +8,23 @@ class Boardina1Screen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          
           Positioned.fill(
             child: Image.asset(
               'assets/images/boardina1_bg.png',
               fit: BoxFit.cover,
             ),
           ),
-
           Positioned(
             top: 50,
             right: 20,
             child: TextButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Text(
                 'Skip',
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
           ),
-
           Positioned(
             top: 120,
             left: 20,
@@ -51,32 +48,16 @@ class Boardina1Screen extends StatelessWidget {
               ],
             ),
           ),
-
-          Positioned(
-            bottom: 250,
-            left: 20,
-            child: ElevatedButton(
-              onPressed: () {
-                
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                side: BorderSide(color: Colors.green),
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              ),
-              child: Text(
-                "Magnified view",
-                style: TextStyle(fontSize: 16, color: Colors.green),
-              ),
-            ),
-          ),
-
           Positioned(
             bottom: 150,
             left: 20,
             right: 20,
             child: ElevatedButton(
               onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Boardina2Screen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
