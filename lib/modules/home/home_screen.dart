@@ -8,9 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Center(
       child: Text(
         'Home',
-        style: TextStyle(
-          fontSize: 25
-        ),
+        style: TextStyle(fontSize: 25),
       ),
     );
   }

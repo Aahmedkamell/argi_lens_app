@@ -1,3 +1,4 @@
+import 'package:agre_lens_app/modules/splash/splash_screen.dart';
 import 'package:agre_lens_app/shared/bloc_observer.dart';
 import 'package:agre_lens_app/shared/network/remote/dio_helper.dart';
 import 'package:bloc/bloc.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: AppLayout(),
+      home: SplashScreen(),
     );
   }
 }
