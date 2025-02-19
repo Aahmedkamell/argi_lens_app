@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:flutter/material.dart';
+import '../Boardina/boardina1_screen.dart';
 import '../home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => AppLayout(),
+          pageBuilder: (context, animation, secondaryAnimation) => Boardina1Screen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             var curve = Curves.easeOut;
             var tween = Tween<double>(begin: 0.0, end: 1.0).chain(
