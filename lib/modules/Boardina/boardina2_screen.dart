@@ -1,4 +1,7 @@
+import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../shared/styles/colors.dart';
 import 'Boardina3_screen.dart';
 
 class Boardina2Screen extends StatelessWidget {
@@ -19,11 +22,12 @@ class Boardina2Screen extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Boardina3Screen()));
+                    MaterialPageRoute(builder: (context) => AppLayout()));
               },
               child: Text(
                 'Skip',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: GoogleFonts.reemKufi(
+                    fontSize: 18, color: Colors.black),
               ),
             ),
           ),
@@ -36,22 +40,83 @@ class Boardina2Screen extends StatelessWidget {
               children: [
                 Text(
                   "Daily care for your plants.",
-                  style: TextStyle(
-                    fontSize: 28,
+                  style: GoogleFonts.reemKufi(
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: ColorManager.blackColor,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Text(
                   "Get detailed information about the plant you see.",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: GoogleFonts.reemKufi(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: ColorManager.blackColor
+                  ),
                 ),
               ],
             ),
           ),
           Positioned(
-            bottom: 150,
+            right: 40,
+            top: 430,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 160,
+                  height: 172,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1.5),
+                    borderRadius: BorderRadius.all(Radius.elliptical(80, 86)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.elliptical(80, 86)),
+                    child: Image.asset(
+                      'assets/images/Detailed View.jpeg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+
+                Positioned(
+                  child: Container(
+                    width: 24,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 0.8),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        'assets/images/Detailed View.jpeg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 38,
+            top: 430,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Detailed  View',
+                style: GoogleFonts.reemKufi(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 100,
             left: 20,
             right: 20,
             child: ElevatedButton(
@@ -62,15 +127,58 @@ class Boardina2Screen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                backgroundColor: ColorManager.greenColor,
                 padding: EdgeInsets.symmetric(vertical: 15),
               ),
               child: Text(
                 "Next",
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: GoogleFonts.reemKufi(
+                    fontSize: 18, color: ColorManager.blackColor
+                ),
               ),
             ),
           ),
+          Positioned(
+            right: 20,
+            left: 20,
+            bottom: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                SizedBox(width: 30),
+                Container(
+                  width: 46,
+                  height: 8.63,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    gradient: LinearGradient(
+                      colors: [ColorManager.greenColor, Color(0xFF0AE0A0)],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 30),
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

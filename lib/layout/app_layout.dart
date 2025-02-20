@@ -27,6 +27,7 @@ class AppLayout extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: Color.fromRGBO(65, 64, 66, 1)),
                     ),
+                    automaticallyImplyLeading: false,
                     actions: [
                         Padding(
                           padding: const EdgeInsetsDirectional.symmetric(

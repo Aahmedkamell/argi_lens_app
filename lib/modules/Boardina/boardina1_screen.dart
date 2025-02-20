@@ -1,3 +1,4 @@
+import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,7 @@ class Boardina1Screen extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Boardina2Screen()));
+                    MaterialPageRoute(builder: (context) => AppLayout()));
               },
               child: Text(
                 'Skip',
