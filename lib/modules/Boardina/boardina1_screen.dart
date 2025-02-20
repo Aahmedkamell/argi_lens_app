@@ -103,7 +103,7 @@ class Boardina1Screen extends StatelessWidget {
             ),
           ),
           Positioned(
-              left: 38,
+              right: 170,
               top: 430,
               child: Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
