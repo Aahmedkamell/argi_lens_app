@@ -106,14 +106,17 @@ class Boardina1Screen extends StatelessWidget {
               right: 170,
               top: 430,
               child: Container(
+                width: 170,
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-              'Magnified view',
-              style: GoogleFonts.reemKufi(fontSize: 18, fontWeight: FontWeight.bold),
+              child: Center(
+                child: Text(
+                'Magnified view',
+                style: GoogleFonts.reemKufi(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ),
