@@ -1,12 +1,22 @@
 import 'package:agre_lens_app/layout/app_layout.dart';
-import 'package:agre_lens_app/modules/Boardina/boardina1_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/styles/colors.dart';
-//import '../auth/login_screen.dart';
 
 class Boardina3Screen extends StatelessWidget {
+  Future<void> _completeOnboarding(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("onboardingCompleted", true);
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => AppLayout()),
+          (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +45,11 @@ class Boardina3Screen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Set up a reminders and keep your plant healthy and strong!",
+                  "Set up reminders and keep your plant healthy and strong!",
                   style: GoogleFonts.reemKufi(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: ColorManager.blackColor
-                  ),
+                      color: ColorManager.blackColor),
                 ),
               ],
             ),
@@ -110,12 +119,7 @@ class Boardina3Screen extends StatelessWidget {
             left: 20,
             right: 20,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => AppLayout()),
-                );
-              },
+              onPressed: () => _completeOnboarding(context),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -126,8 +130,7 @@ class Boardina3Screen extends StatelessWidget {
               child: Text(
                 "Next",
                 style: GoogleFonts.reemKufi(
-                    fontSize: 18, color: ColorManager.blackColor
-                ),
+                    fontSize: 18, color: ColorManager.blackColor),
               ),
             ),
           ),

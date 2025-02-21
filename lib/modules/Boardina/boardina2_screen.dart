@@ -1,6 +1,7 @@
 import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../shared/styles/colors.dart';
 import 'Boardina3_screen.dart';
 
@@ -20,14 +21,18 @@ class Boardina2Screen extends StatelessWidget {
             top: 50,
             right: 20,
             child: TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => AppLayout()));
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool("onboardingCompleted", true);
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => AppLayout()),
+                );
               },
               child: Text(
                 'Skip',
-                style: GoogleFonts.reemKufi(
-                    fontSize: 18, color: Colors.black),
+                style: GoogleFonts.reemKufi(fontSize: 18, color: Colors.black),
               ),
             ),
           ),
