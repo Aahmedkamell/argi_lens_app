@@ -57,20 +57,38 @@ class AppLayout extends StatelessWidget {
                       ])
                 : null,
             body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              items: cubit.bottomItems,
-              currentIndex: cubit.currentIndex,
-              elevation: 20.0,
-              selectedItemColor: ColorManager.greenColor,
-              unselectedItemColor: Color(0xFF484C52), //
-              selectedLabelStyle:
-                  TextStyle(color: ColorManager.greenColor, fontSize: 12),
-              unselectedLabelStyle:
-                  TextStyle(color: Color(0xFF484C52), fontSize: 12),
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) {
-                cubit.changeNavBarIndex(index);
-              },
+            bottomNavigationBar: Stack(
+              children: [
+                Container(
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 2,
+                        spreadRadius: 0,
+                        offset: Offset(0, -3),
+                      )
+                    ]
+                  ),
+                ),
+                BottomNavigationBar(
+                  items: cubit.bottomItems,
+                  currentIndex: cubit.currentIndex,
+                  elevation: 0,
+                  selectedItemColor: ColorManager.greenColor,
+                  unselectedItemColor: Color(0xFF484C52), //
+                  selectedLabelStyle:
+                      TextStyle(color: ColorManager.greenColor, fontSize: 12),
+                  unselectedLabelStyle:
+                      TextStyle(color: Color(0xFF484C52), fontSize: 12),
+                  type: BottomNavigationBarType.fixed,
+                  onTap: (index) {
+                    cubit.changeNavBarIndex(index);
+                  },
+                ),
+              ],
             ),
           );
         },

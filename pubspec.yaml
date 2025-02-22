@@ -42,7 +42,12 @@ dependencies:
   dio: ^5.8.0+1
   flutter_svg: ^2.0.17
   google_fonts: ^6.2.1
+<<<<<<< HEAD
   shared_preferences: ^2.2.2
+=======
+  shared_preferences: ^2.5.2
+  change_app_package_name: ^1.4.0
+>>>>>>> aadbae6c3aefd36fac7df4011aaa6c7e5244a126
 
 dev_dependencies:
   flutter_test:

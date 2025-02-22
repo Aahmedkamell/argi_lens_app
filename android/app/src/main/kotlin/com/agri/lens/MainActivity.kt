@@ -1,4 +1,4 @@
-package com.example.argi_lens_app
+package com.agri.lens
 
 import io.flutter.embedding.android.FlutterActivity
 
