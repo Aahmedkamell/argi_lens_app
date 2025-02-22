@@ -4,8 +4,6 @@ import 'package:agre_lens_app/shared/network/remote/dio_helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'layout/app_layout.dart';
-
 void main() {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();

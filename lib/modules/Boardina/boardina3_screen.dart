@@ -1,5 +1,6 @@
 import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:agre_lens_app/modules/Boardina/boardina1_screen.dart';
+import 'package:agre_lens_app/modules/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -110,7 +111,7 @@ class Boardina3Screen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => AppLayout()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
