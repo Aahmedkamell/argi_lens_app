@@ -1,9 +1,6 @@
 import 'package:agre_lens_app/layout/app_layout.dart';
-<<<<<<< HEAD
 import 'package:agre_lens_app/modules/Boardina/boardina1_screen.dart';
 import 'package:agre_lens_app/modules/login/login_screen.dart';
-=======
->>>>>>> aadbae6c3aefd36fac7df4011aaa6c7e5244a126
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -124,16 +121,7 @@ class Boardina3Screen extends StatelessWidget {
             left: 20,
             right: 20,
             child: ElevatedButton(
-<<<<<<< HEAD
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-=======
               onPressed: () => _completeOnboarding(context),
->>>>>>> aadbae6c3aefd36fac7df4011aaa6c7e5244a126
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),

@@ -2,7 +2,6 @@ import 'package:agre_lens_app/models/shared%20prefs/shared_prefs_helper.dart';
 import 'package:agre_lens_app/modules/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -48,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Stack(
               children: [
-                Image.asset('assets/images/login_bg.jpg',
+                Image.asset('assets/images/login_bg.png',
                     width: double.infinity, fit: BoxFit.cover),
                 Positioned(
                   top: 100,

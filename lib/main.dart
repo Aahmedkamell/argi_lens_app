@@ -5,15 +5,11 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-<<<<<<< HEAD
-void main() {
-=======
 import 'layout/app_layout.dart';
 import 'modules/Boardina/boardina1_screen.dart';
 
 void main () async {
   WidgetsFlutterBinding.ensureInitialized();
->>>>>>> aadbae6c3aefd36fac7df4011aaa6c7e5244a126
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   runApp(MyApp());
