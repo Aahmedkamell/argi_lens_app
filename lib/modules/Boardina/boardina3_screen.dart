@@ -14,7 +14,7 @@ class Boardina3Screen extends StatelessWidget {
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => AppLayout()),
+      MaterialPageRoute(builder: (context) => LoginPage()),
           (route) => false,
     );
   }

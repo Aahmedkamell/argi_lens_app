@@ -45,7 +45,7 @@ class AppLayout extends StatelessWidget {
                               backgroundColor: Colors.transparent,
                               child: ClipOval(
                                 child: Image.network(
-                                  'https://s3-alpha-sig.figma.com/img/3db6/28d8/114007a2224cdc91cff4b6f9f47f7187?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FKaOVv0jhPM4lCXJh6UcJ0ghvrPUUXODqniFLsBD~kB5er~F-LUbhb0sVM7OLhtI3gFzd5DeJi9WC-mfARMpYvBNeyeQ8AmMSOrhZsfRRNWKvqq1UcluK0YvodZlg3B0O-IFRRWEKdhsk3ZPy8yGQ9GZPug0cPlrtxgL9eEhkWzfIXWnxrAue5KPeGUL0pRlpJfgyzdDU4JcDirP5PNtcLzQYyUC7uCYV3wqaqmkhfwK6ENRR2Ux8cV0MPeOPGn-ItlvTZeq74o62W3ca2OfXbsaF5UPRbFj11uxYkVqge4fRZcKqa0eMHZkDeuew3cEeTvzF78jIRyi-s-pD5msiQ__',
+                                  'https://s3-alpha-sig.figma.com/img/3db6/28d8/114007a2224cdc91cff4b6f9f47f7187?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=WH48uKEV4194hK0QEWptM8V2EITeetjoUakICg3qBDDUgGawfL7hYijVMizge3wy6AHz6xzXTPK5SBAFqf4DLEMz6xJNItNHzPPvKC2bRXJy-AP89sxtzranFaShSAIE-27OaLxNfG0VDXfj4VQ2iqKkYVOOqDCjQyszNQ7fVkORy2gh2xGw0Yyg7eNn57iYpNNQvRgDwYbzkxDv0Mi6WRQBakgT4kL~GRphRMvPhrQ8vloe35XSkD5pMOSXHOxo1DmfB5sDHGgDrbvhVvG8vFAwzW7fev6ZQLovnff3NNMxTwx4Xhl~BZThpiSp1le~cFJPeh3REQUYplB4AKm5~Q__',
                                   fit: BoxFit.cover,
                                   width: 45,
                                   height: 44,

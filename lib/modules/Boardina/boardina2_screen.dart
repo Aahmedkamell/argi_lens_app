@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../shared/styles/colors.dart';
 import 'Boardina3_screen.dart';
+import 'package:agre_lens_app/modules/login/login_screen.dart';
+
 
 class Boardina2Screen extends StatelessWidget {
   @override
@@ -27,7 +29,7 @@ class Boardina2Screen extends StatelessWidget {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => AppLayout()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
               child: Text(

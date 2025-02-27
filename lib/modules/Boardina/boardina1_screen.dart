@@ -6,6 +6,8 @@ import 'package:agre_lens_app/modules/Boardina/Boardina2_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Boardina2_screen.dart';
+import 'package:agre_lens_app/modules/login/login_screen.dart';
+
 
 class Boardina1Screen extends StatelessWidget {
   @override
@@ -29,7 +31,7 @@ class Boardina1Screen extends StatelessWidget {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => AppLayout()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
               child: Text(
