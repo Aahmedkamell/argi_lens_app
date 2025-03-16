@@ -45,7 +45,7 @@ class AppLayout extends StatelessWidget {
                               backgroundColor: Colors.transparent,
                               child: ClipOval(
                                 child: Image.network(
-                                  'https://s3-alpha-sig.figma.com/img/3db6/28d8/114007a2224cdc91cff4b6f9f47f7187?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=WH48uKEV4194hK0QEWptM8V2EITeetjoUakICg3qBDDUgGawfL7hYijVMizge3wy6AHz6xzXTPK5SBAFqf4DLEMz6xJNItNHzPPvKC2bRXJy-AP89sxtzranFaShSAIE-27OaLxNfG0VDXfj4VQ2iqKkYVOOqDCjQyszNQ7fVkORy2gh2xGw0Yyg7eNn57iYpNNQvRgDwYbzkxDv0Mi6WRQBakgT4kL~GRphRMvPhrQ8vloe35XSkD5pMOSXHOxo1DmfB5sDHGgDrbvhVvG8vFAwzW7fev6ZQLovnff3NNMxTwx4Xhl~BZThpiSp1le~cFJPeh3REQUYplB4AKm5~Q__',
+                                  'https://s3-alpha-sig.figma.com/img/3db6/28d8/114007a2224cdc91cff4b6f9f47f7187?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SXRs0keKMvzMjlYu76pOkmyAt4jZx0Yam7pbLmKNVaxFKIwJr~rkKjtMDLXqiLjVmVnGfd2aMNcyDWgk3uMHhfNU5cIZt2yC45xTAX65YTy9TLtgCgf5zvpSoO1VnnsUTBZzWmxXCxQzvzTkWsZapkK80iohrgHk7qFKP5re637NEpBDFLLQs84c5mZYHkL3adqj5UrYGDpyASYwny3jyZ8jNtiY7t6QDb-6xk3auXxdXpjF7G-hjvGzIjB7fX9EsjlJWlhedCAyrVd5dxwN5E2ees9UT~T-SCFqStnYbpH9UgdXAfleaShvqyzxuJXCoakv251GC4dcm6NV04YZkA__',
                                   fit: BoxFit.cover,
                                   width: 45,
                                   height: 44,
