@@ -78,7 +78,7 @@ class AppLayout extends StatelessWidget {
                   currentIndex: cubit.currentIndex,
                   elevation: 0,
                   selectedItemColor: ColorManager.greenColor,
-                  unselectedItemColor: Color(0xFF484C52), //
+                  unselectedItemColor: const Color(0xFF484C52), //
                   selectedLabelStyle:
                       TextStyle(color: ColorManager.greenColor, fontSize: 12),
                   unselectedLabelStyle:

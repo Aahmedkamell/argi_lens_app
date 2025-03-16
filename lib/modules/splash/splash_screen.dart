@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../layout/app_layout.dart';
 import '../Boardina/boardina1_screen.dart';
-import 'package:agre_lens_app/modules/login/login_screen.dart';
-
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-          onboardingCompleted ? LoginPage() : Boardina1Screen(),
+          onboardingCompleted ? AppLayout() : Boardina1Screen(),
         ),
       );
     });
