@@ -1,3 +1,4 @@
+import 'package:agre_lens_app/modules/login/login_screen.dart';
 import 'package:agre_lens_app/modules/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,8 +57,8 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute( 
-                    builder: (context) => const ProfileScreen(),//login screen
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(), //login screen
                   ),
                 );
               },
@@ -98,34 +99,29 @@ class SettingsCard extends StatelessWidget {
       ),
       child: Column(
         children: items.map((item) {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(
-                  item['title'],
-                  style: GoogleFonts.openSans(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+          return Column(children: [
+            ListTile(
+              title: Text(
+                item['title'],
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                 {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProfileScreen(),
-                      ),
-                    );
-                  
-                }
-              
-              },
               ),
-            ]
-
-          );
-                  }).toList(),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                }
+              },
+            ),
+          ]);
+        }).toList(),
       ),
     );
   }
