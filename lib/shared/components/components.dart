@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:buildcondition/buildcondition.dart';
@@ -77,7 +76,7 @@ Widget defaultButton({
   onTap: onTap,
   child: Container(
         height: 36,
-        width: 322,
+        width: double.infinity,
         decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         color: colorButton

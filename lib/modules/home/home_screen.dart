@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10,),
           Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20,bottom: 10),
             child: Row(
               children: [
                 sensorReading(sensorName: 'Water', sensorStats: 92),
