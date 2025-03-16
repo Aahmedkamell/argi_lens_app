@@ -1,3 +1,4 @@
+import 'package:agre_lens_app/modules/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,26 +37,34 @@ class SettingsScreen extends StatelessWidget {
         ),
         leading: const BackButton(color: Colors.black),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            SettingsCard(items: settingsItems),
-            const SizedBox(height: 30), 
-            SettingsCard(items: otherItems),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.09),     
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SettingsCard(items: settingsItems),
+                    const SizedBox(height: 30),
+                    SettingsCard(items: otherItems),
+                  ],
+                ),
+              ),
+            ),
             TextButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const DummyScreen(title: "Log In"),
+                  MaterialPageRoute( 
+                    builder: (context) => const ProfileScreen(),//login screen
                   ),
                 );
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -101,27 +110,29 @@ class SettingsCard extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DummyScreen(title: item['title']),
-                    ),
-                  );
-                },
+                 {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  
+                }
+              
+              },
               ),
-              if (item != items.last)
-                const Divider(height: 1, thickness: 1, indent: 16, endIndent: 16),
-            ],
+            ]
+
           );
-        }).toList(),
+                  }).toList(),
       ),
     );
   }
 }
-
-class DummyScreen extends StatelessWidget {
-  final String title;
-  const DummyScreen({super.key, required this.title});
+/*
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +140,7 @@ class DummyScreen extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         title: Text(
-          title,
+          'Profile',
           style: GoogleFonts.poppins(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -142,7 +153,7 @@ class DummyScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'This is $title screen',
+          'Profile Screen',
           style: GoogleFonts.openSans(
             fontSize: 18,
             fontWeight: FontWeight.w400,
@@ -152,3 +163,19 @@ class DummyScreen extends StatelessWidget {
     );
   }
 }
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Login Screen',
+          style: GoogleFonts.openSans(fontSize: 18),
+        ),
+      ),
+    );
+  }
+}*/
