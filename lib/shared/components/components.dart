@@ -67,6 +67,55 @@ Widget defaultFormField({
       ),
     );
 
+Widget profileFormField({
+  required String label,
+  required TextEditingController controller,
+  bool obscureText = false,
+})=> Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      label,
+      style: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        height: 0.88,
+        letterSpacing: 0,
+        color: Colors.black,
+      ),
+    ),
+    const SizedBox(height: 8),
+    Container(
+      width: double.infinity,
+      height: 44,
+      child: TextFormField(
+        obscureText: obscureText,
+        controller: controller,
+        cursorColor: Colors.black,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        ),
+        style: GoogleFonts.openSans(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    ),
+  ],
+);
+
 Widget defaultButton({
   required Color? colorButton,
   required Color? textColorButton,

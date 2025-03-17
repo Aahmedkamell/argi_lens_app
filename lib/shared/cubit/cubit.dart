@@ -16,11 +16,35 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+  var emailController = TextEditingController(text: 'acc.motharwat@gmail.com');
+  var passwordController = TextEditingController(text: '************');
+  var userNameController = TextEditingController(text: 'Mohamed Tharwat');
+  var farmNameController = TextEditingController(text: 'My Farm');
+
+  int selectedHour = 0;
+  int selectedMinute = 0;
+
+  void changeHour(int hour) {
+    selectedHour = hour;
+    emit(TimerUpdatedState());
+  }
+
+  void changeMinute(int minute) {
+    selectedMinute = minute;
+    emit(TimerUpdatedState());
+  }
+
+  void resetTimer() {
+    selectedHour = 0;
+    selectedMinute = 0;
+    emit(TimerResetState());
+  }
+
   int currentIndex = 0;
 
   List<Widget> screens = [
     const HomeScreen(),
-    const TimerScreen(),
+    TimerScreen(),
     const ScanScreen(),
     const HistoryScreen(),
     const SettingsScreen()
