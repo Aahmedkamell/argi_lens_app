@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:agre_lens_app/modules/all%20plants/all_plant_screen.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         if (state is TimerSavedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Time updated!',
+              content: Text('Timer updated!',
               style: TextStyle(fontSize: 16),
               ),
               duration: Duration(seconds: 1),
@@ -76,7 +77,13 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AllPlantScreen()),
+                        );
+                      },
                       child: Text('Your Plants Health',
                         style: GoogleFonts.reemKufi(
                             fontSize: 18,

@@ -19,10 +19,18 @@ class AppCubit extends Cubit<AppStates> {
     _init();
   }
   void _init() async {
-    await loadSavedTimer(); // تحميل القيم المحفوظة مبكرًا
+    await loadSavedTimer();
   }
 
   static AppCubit get(context) => BlocProvider.of(context);
+
+  int healthPlantPrecentage = 45;
+
+  void updateHealth(int newHealth) {
+    healthPlantPrecentage = newHealth;
+    emit(AppHealthUpdatedState());
+  }
+
 
   var emailController = TextEditingController(text: 'acc.motharwat@gmail.com');
   var passwordController = TextEditingController(text: '************');

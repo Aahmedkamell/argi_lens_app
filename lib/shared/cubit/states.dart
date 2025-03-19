@@ -12,5 +12,7 @@ class TimerSavedState extends AppStates{}
 
 class AppUpdateTimeState extends AppStates{}
 
+class AppHealthUpdatedState extends AppStates{}
+
 
 
