@@ -16,7 +16,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is TimerSavedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Time updated!',
+              style: TextStyle(fontSize: 16),
+              ),
+              duration: Duration(seconds: 1),
+              backgroundColor: ColorManager.greenColor,
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Padding(padding: EdgeInsets.only(left: 22),

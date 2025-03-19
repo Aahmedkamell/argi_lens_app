@@ -8,7 +8,9 @@ class AppProfileOpenedState extends AppStates{}
 
 class TimerResetState extends AppStates{}
 
-class TimerUpdatedState extends AppStates{}
+class TimerSavedState extends AppStates{}
+
+class AppUpdateTimeState extends AppStates{}
 
 
 

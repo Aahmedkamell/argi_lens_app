@@ -343,3 +343,29 @@ Widget sensorReading ({
     ),
   ),
 );
+
+Widget timerButton({
+  required Function()? onTap,
+  required String textButton,
+  required Color buttonColor,
+  required Color borderButtonColor,
+  required Color textColorButton,
+})=> GestureDetector(
+  onTap: onTap,
+  child: Container(
+      height: 45,
+      width: 145,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      decoration: BoxDecoration(
+        color: buttonColor,
+        border: Border.all(color: borderButtonColor),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Center(
+        child: Text(
+          textButton,
+        style: TextStyle(color: textColorButton, fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+      ),
+  ),
+);

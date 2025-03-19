@@ -10,9 +10,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppCubit extends Cubit<AppStates> {
-  AppCubit() : super(AppInitialStates());
+  AppCubit() : super(AppInitialStates()){
+    hourController = FixedExtentScrollController(initialItem: selectedHour);
+    minuteController = FixedExtentScrollController(initialItem: selectedMinute);
+    _init();
+  }
+  void _init() async {
+    await loadSavedTimer(); // تحميل القيم المحفوظة مبكرًا
+  }
 
   static AppCubit get(context) => BlocProvider.of(context);
 
@@ -21,24 +29,68 @@ class AppCubit extends Cubit<AppStates> {
   var userNameController = TextEditingController(text: 'Mohamed Tharwat');
   var farmNameController = TextEditingController(text: 'My Farm');
 
-  int selectedHour = 0;
+
+  int selectedHour = 1;
   int selectedMinute = 0;
 
-  void changeHour(int hour) {
-    selectedHour = hour;
-    emit(TimerUpdatedState());
+  int savedHour = 1;
+  int savedMinute = 0;
+
+  late FixedExtentScrollController hourController;
+  late FixedExtentScrollController minuteController;
+
+  Future<void> loadSavedTimer() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    savedHour = prefs.getInt('savedHour') ?? 1;
+    savedMinute = prefs.getInt('savedMinute') ?? 0;
+
+    selectedHour = savedHour;
+    selectedMinute = savedMinute;
+
+    // تحديث المؤشرات بدون إعادة التهيئة
+    hourController.jumpToItem(selectedHour);
+    minuteController.jumpToItem(selectedMinute);
+
+    emit(TimerResetState()); // تحديث الواجهة
   }
 
-  void changeMinute(int minute) {
+  Future<void> saveTimer() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('savedHour', selectedHour);
+    await prefs.setInt('savedMinute', selectedMinute);
+
+    savedHour = selectedHour;
+    savedMinute = selectedMinute;
+
+    emit(TimerSavedState()); // إرسال حالة الحفظ
+  }
+
+
+
+
+
+  void updateHour(int hour) {
+    selectedHour = hour;
+    emit(AppUpdateTimeState());
+  }
+
+  void updateMinute(int minute) {
     selectedMinute = minute;
-    emit(TimerUpdatedState());
+    emit(AppUpdateTimeState());
   }
 
   void resetTimer() {
-    selectedHour = 0;
-    selectedMinute = 0;
+    selectedHour = savedHour;
+    selectedMinute = savedMinute;
+
+    hourController.jumpToItem(selectedHour);
+    minuteController.jumpToItem(selectedMinute);
+
     emit(TimerResetState());
   }
+
+
 
   int currentIndex = 0;
 
