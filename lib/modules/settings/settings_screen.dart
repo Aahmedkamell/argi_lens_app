@@ -1,23 +1,28 @@
-import 'package:agre_lens_app/modules/login/login_screen.dart';
+import 'package:agre_lens_app/models/settings/settings_card.dart';
+import 'package:agre_lens_app/models/settings/settings_item.dart';
 import 'package:agre_lens_app/modules/profile/profile_screen.dart';
+import 'package:agre_lens_app/modules/settings/notifications_screen.dart';
+import 'package:agre_lens_app/modules/settings/privacy_policy_screen.dart';
+import 'package:agre_lens_app/modules/settings/termes_of_use_screen.dart';
+import 'package:agre_lens_app/modules/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  SettingsScreen({super.key});
 
-  final List<Map<String, dynamic>> settingsItems = const [
-    {'title': 'Profile'},
-    {'title': 'Notifications'},
-    {'title': 'Privacy Policy'},
-    {'title': 'Terms of Use'},
+  final List<SettingsItem> settingsItems = [
+    SettingsItem(title: 'Profile', screen: ProfileScreen()),
+     SettingsItem(title: 'Notifications', screen: NotificationsScreen()),
+    SettingsItem(title: 'Privacy Policy', screen: PrivacyPolicyScreen()),
+     SettingsItem(title: 'Terms of Use', screen: TermsOfUseScreen()),
   ];
 
-  final List<Map<String, dynamic>> otherItems = const [
-    {'title': 'App Info'},
-    {'title': 'Rate Our App'},
-    {'title': 'Help Center'},
-    {'title': 'Contact Us'},
+  final List<SettingsItem> otherItems =  [ // موقتا غلشان الرن
+    SettingsItem(title: 'App Info', screen: ProfileScreen()),
+    SettingsItem(title: 'Rate Our App', screen: ProfileScreen()),
+    SettingsItem(title: 'Help Center', screen: ProfileScreen()),
+    SettingsItem(title: 'Contact Us', screen: ProfileScreen()),
   ];
 
   @override
@@ -58,14 +63,13 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginPage(), //login screen
+                    builder: (context) => const LoginPage(),
                   ),
                 );
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -85,93 +89,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
-class SettingsCard extends StatelessWidget {
-  final List<Map<String, dynamic>> items;
-  const SettingsCard({super.key, required this.items});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: items.map((item) {
-          return Column(children: [
-            ListTile(
-              title: Text(
-                item['title'],
-                style: GoogleFonts.openSans(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfileScreen(),
-                    ),
-                  );
-                }
-              },
-            ),
-          ]);
-        }).toList(),
-      ),
-    );
-  }
-}
-/*
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        title: Text(
-          'Profile',
-          style: GoogleFonts.poppins(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Colors.grey.shade100,
-        elevation: 0,
-        leading: const BackButton(color: Colors.black),
-      ),
-      body: Center(
-        child: Text(
-          'Profile Screen',
-          style: GoogleFonts.openSans(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'Login Screen',
-          style: GoogleFonts.openSans(fontSize: 18),
-        ),
-      ),
-    );
-  }
-}*/

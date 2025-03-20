@@ -5,8 +5,6 @@ import 'package:agre_lens_app/modules/settings/settings_screen.dart';
 import 'package:agre_lens_app/modules/timer/timer_screen.dart';
 import 'package:agre_lens_app/shared/cubit/states.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,19 +12,19 @@ import 'package:flutter_svg/svg.dart';
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialStates());
 
-  static AppCubit get(context) => BlocProvider.of(context);
+  static AppCubit get(BuildContext context) => BlocProvider.of(context);
 
   int currentIndex = 0;
 
-  List<Widget> screens = [
-    const HomeScreen(),
-    const TimerScreen(),
-    const ScanScreen(),
-    const HistoryScreen(),
-    const SettingsScreen()
+  final List<Widget> screens = [
+    HomeScreen(),
+    TimerScreen(),
+    ScanScreen(),
+    HistoryScreen(),
+    SettingsScreen(),
   ];
 
-  List<String> svgIcons = [
+  final List<String> svgIcons = [
     'assets/icons/home.svg',
     'assets/icons/timer.svg',
     'assets/icons/scan.svg',
@@ -34,7 +32,7 @@ class AppCubit extends Cubit<AppStates> {
     'assets/icons/settings.svg',
   ];
 
-  List<String> labels = ['Home', 'Timer', '', 'History', 'Settings'];
+  final List<String> labels = ['Home', 'Timer', '', 'History', 'Settings'];
 
   void changeNavBarIndex(int index) {
     currentIndex = index;
@@ -43,36 +41,34 @@ class AppCubit extends Cubit<AppStates> {
 
   List<BottomNavigationBarItem> get bottomItems {
     return List.generate(svgIcons.length, (index) {
+      final bool isSelected = currentIndex == index;
+
       return BottomNavigationBarItem(
-        icon: Builder(
-          builder: (context) => index == 2
-              ? Container(
-            height: 52,
-            width: 52,
-            decoration: BoxDecoration(
-              color: ColorManager.greenColor,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: SvgPicture.asset(
+        icon: index == 2
+            ? Container(
+                height: 52,
+                width: 52,
+                decoration: BoxDecoration(
+                  color: ColorManager.greenColor,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    svgIcons[index],
+                    width: 24,
+                    height: 24,
+                  ),
+                ),
+              )
+            : SvgPicture.asset(
                 svgIcons[index],
                 width: 24,
                 height: 24,
+                colorFilter: ColorFilter.mode(
+                  isSelected ? ColorManager.greenColor : const Color(0xFF484C52),
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
-          )
-              : SvgPicture.asset(
-            svgIcons[index],
-            width: 24,
-            height: 24,
-            colorFilter: ColorFilter.mode(
-              currentIndex == index
-                  ? ColorManager.greenColor
-                  : Color(0xFF484C52),
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
         label: labels[index],
       );
     });
