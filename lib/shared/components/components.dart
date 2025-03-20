@@ -211,6 +211,7 @@ Widget healthPlantBuilder()=>BuildCondition(
   condition: true,
   builder: (context)=> ListView.separated(
       scrollDirection: Axis.horizontal,
+      shrinkWrap: true,
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.only(right: 10),
       itemBuilder: (context, index)=> buildHealthPlantItem(),
@@ -414,7 +415,7 @@ Widget sensorReading ({
   required int? sensorStats,
 })=> Container(
   height: 72,
-  width: 99,
+  width: 104,
   decoration: BoxDecoration(
     color: Color(0xFFFAFAFA),
     borderRadius: BorderRadius.circular(10),

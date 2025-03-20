@@ -74,44 +74,55 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10,),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AllPlantScreen()),
-                        );
-                      },
-                      child: Text('Your Plants Health',
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllPlantScreen()),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Your Plants Health',
                         style: GoogleFonts.reemKufi(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF414042)
                         ),
                       ),
-                    ),
-                    Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
-                  ],
+                      Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(height: 150,child: healthPlantBuilder(),),
                 const SizedBox(height: 5,),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: (){},
-                      child: Text('All Floors',
-                        style: GoogleFonts.reemKufi(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF414042)
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AllPlantScreen()),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: (){},
+                        child: Text('All Floors',
+                          style: GoogleFonts.reemKufi(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF414042)
+                          ),
                         ),
                       ),
-                    ),
-                    Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
-                  ],
+                      Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(height: 160,child: floorPlantBuilder(),),
@@ -127,12 +138,13 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 20,bottom: 10),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      sensorReading(sensorName: 'Water', sensorStats: 92),
+                      Expanded(child: sensorReading(sensorName: 'Water', sensorStats: 92)),
                       SizedBox(width: 10,),
-                      sensorReading(sensorName: 'PH', sensorStats: 96),
+                      Expanded(child: sensorReading(sensorName: 'PH', sensorStats: 96)),
                       SizedBox(width: 10,),
-                      sensorReading(sensorName: 'DHT', sensorStats: 94),
+                      Expanded(child: sensorReading(sensorName: 'DHT', sensorStats: 94)),
                     ],
                   ),
                 )
