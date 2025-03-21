@@ -560,10 +560,13 @@ Widget timerButton({
 );
 
 Color getHealthColor(int healthPercentage) {
-  if (healthPercentage <= 75) {
-    return Color.lerp(ColorManager.redColor, ColorManager.yellowColor, healthPercentage / 75)!;
+  if (healthPercentage <= 50) {
+    return ColorManager.redColor; // يبقى اللون أحمر حتى 50%
+  } else if (healthPercentage <= 75) {
+    return Color.lerp(ColorManager.redColor, ColorManager.yellowColor, (healthPercentage - 50) / 25)!;
   } else {
     return Color.lerp(ColorManager.yellowColor, ColorManager.greenColor, (healthPercentage - 75) / 25)!;
   }
 }
+
 
