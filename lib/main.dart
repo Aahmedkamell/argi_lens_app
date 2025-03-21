@@ -14,12 +14,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-  runApp(MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => AppCubit(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return BlocProvider(
       create: (context) => AppCubit(), 
       child: MaterialApp(
@@ -27,6 +33,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),
+=======
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFFFEF7FF)
+      ),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+>>>>>>> 0667b57e3d013ee77b3ccbb51954e46bc7ad650e
     );
   }
 }
