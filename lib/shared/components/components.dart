@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:buildcondition/buildcondition.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../modules/floor/floor_screen.dart';
+import '../../modules/plant details/plant_details_screen.dart';
 import '../styles/colors.dart';
 
 Widget defaultFormField({
@@ -137,74 +139,96 @@ Widget defaultButton({
   ),
 );
 
-Widget buildHealthPlantItem()=> Column(
-  children: [
-    Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          height: 104,
-          width: 104,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                spreadRadius: 0,
-                blurRadius: 4,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
-              child: Image.asset(
-                'assets/images/plant health.jpeg',
-                fit: BoxFit.cover,
+Widget buildHealthPlantItem({
+  required BuildContext context,
+  required String floor,
+  required String cell,
+  required int healthPercentage,
+  //required String imgUrl,
+
+})=> InkWell(
+  onTap: (){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlantDetailsScreen(
+          floor: floor,
+          cell: cell,
+          healthPercentage: healthPercentage,
+          //imgUrl : imgUrl
+        ),
+      ),
+    );
+  },
+  child: Column(
+    children: [
+      Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 104,
+            width: 104,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 0,
+                  blurRadius: 4,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+                child: Image.asset(
+                  'assets/images/plant health.jpeg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          height: 70,
-          width: 70,
-          decoration: BoxDecoration(
-            border: Border.all(
-                color: ColorManager.redColor
-            ),
-            shape: BoxShape.circle,
-          ),
-        ),
-        Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
               border: Border.all(
-                  color: ColorManager.redColor
+                  color: getHealthColor(healthPercentage),
               ),
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.55)
+            ),
           ),
-        ),
-        Text('45%',
-          style: GoogleFonts.reemKufi(
-              fontWeight: FontWeight.w700,
-              fontSize: 14,
-              color: Colors.black
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: getHealthColor(healthPercentage),
+                ),
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.55)
+            ),
           ),
-        ),
-      ],
-    ),
-    const SizedBox(height: 5,),
-    Text('Floor 1\nCell 3',
-      style: GoogleFonts.reemKufi(
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
-          color: Colors.black
-      ),)
-  ],
+          Text('$healthPercentage%',
+            style: GoogleFonts.reemKufi(
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+                color: Colors.black
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 5,),
+      Text('$floor\n$cell',
+        style: GoogleFonts.reemKufi(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: Colors.black
+        ),)
+    ],
+  ),
 );
 
 Widget healthPlantBuilder()=>BuildCondition(
@@ -214,9 +238,14 @@ Widget healthPlantBuilder()=>BuildCondition(
       shrinkWrap: true,
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.only(right: 10),
-      itemBuilder: (context, index)=> buildHealthPlantItem(),
+      itemBuilder: (context, index)=> buildHealthPlantItem(
+        context: context,
+        floor: 'Floor ${index + 1}',
+        cell: 'Cell ${index + 1}',
+        healthPercentage: min(index * 10, 100),
+      ),
       separatorBuilder: (context, index)=> SizedBox(width: 15,),
-      itemCount: 5),
+      itemCount: 11),
   fallback: (context)=> Center(child: CircularProgressIndicator(
     color: ColorManager.greenColor,
   )),
@@ -305,12 +334,29 @@ Widget floorPlantBuilder()=>BuildCondition(
   )),
 );
 
-Widget buildAllHealthPlantItem()=> Padding(
+Widget buildAllHealthPlantItem({
+  required BuildContext context,
+  required String floor,
+  required String cell,
+  required int healthPercentage,
+})=> Padding(
   padding: const EdgeInsets.only(left: 22),
   child: Column(
     children: [
       InkWell(
-        onTap: (){},
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlantDetailsScreen(
+                floor: floor,
+                cell: cell,
+                healthPercentage: healthPercentage,
+                //imgUrl : imgUrl
+              ),
+            ),
+          );
+        },
         child: Row(
           children: [
             Stack(
@@ -346,7 +392,7 @@ Widget buildAllHealthPlantItem()=> Padding(
                   width: 70,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: ColorManager.redColor
+                        color: getHealthColor(healthPercentage),
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -356,13 +402,13 @@ Widget buildAllHealthPlantItem()=> Padding(
                   width: 60,
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: ColorManager.redColor
+                          color: getHealthColor(healthPercentage),
                       ),
                       shape: BoxShape.circle,
                       color: Colors.white.withOpacity(0.55)
                   ),
                 ),
-                Text('45%',
+                Text('$healthPercentage%',
                   style: GoogleFonts.reemKufi(
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
@@ -375,13 +421,13 @@ Widget buildAllHealthPlantItem()=> Padding(
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Floor 1\nCell 3',
+                Text('$floor\n$cell',
                   style: GoogleFonts.reemKufi(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: Colors.black
                   ),),
-                Text('Health Percentage 45%',
+                Text('Health Percentage $healthPercentage%',
                   style: GoogleFonts.reemKufi(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -402,9 +448,14 @@ Widget allHealthPlantBuilder()=>BuildCondition(
       scrollDirection: Axis.vertical,
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.only(right: 10),
-      itemBuilder: (context, index)=> buildAllHealthPlantItem(),
+      itemBuilder: (context, index)=> buildAllHealthPlantItem(
+        context: context,
+        floor: 'Floor ${index + 1}',
+        cell: 'Cell ${index + 1}',
+        healthPercentage: min(index * 10, 100),
+      ),
       separatorBuilder: (context, index)=> SizedBox(height: 10,),
-      itemCount: 10),
+      itemCount: 11),
   fallback: (context)=> Center(child: CircularProgressIndicator(
     color: ColorManager.greenColor,
   )),
@@ -456,6 +507,32 @@ Widget sensorReading ({
   ),
 );
 
+Widget detailesText ({
+  required String headText,
+  required String bodyText,
+})=> Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      headText,
+      style: GoogleFonts.reemKufi(
+        fontWeight: FontWeight.w700,
+        fontSize: 20,
+        color: ColorManager.greenColor
+      ),
+    ),
+    SizedBox(height: 15,),
+    Text(
+      bodyText,
+      style: GoogleFonts.reemKufi(
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          color: Color(0xFF494949)
+      ),
+    ),
+  ],
+);
+
 Widget timerButton({
   required Function()? onTap,
   required String textButton,
@@ -481,3 +558,12 @@ Widget timerButton({
       ),
   ),
 );
+
+Color getHealthColor(int healthPercentage) {
+  if (healthPercentage <= 75) {
+    return Color.lerp(ColorManager.redColor, ColorManager.yellowColor, healthPercentage / 75)!;
+  } else {
+    return Color.lerp(ColorManager.yellowColor, ColorManager.greenColor, (healthPercentage - 75) / 25)!;
+  }
+}
+

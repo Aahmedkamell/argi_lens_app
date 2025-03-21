@@ -110,14 +110,11 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      InkWell(
-                        onTap: (){},
-                        child: Text('All Floors',
-                          style: GoogleFonts.reemKufi(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF414042)
-                          ),
+                      Text('All Floors',
+                        style: GoogleFonts.reemKufi(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF414042)
                         ),
                       ),
                       Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
