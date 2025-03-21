@@ -41,48 +41,22 @@ class SettingsScreen extends StatelessWidget {
             backgroundColor: Colors.grey.shade100,
             elevation: 0,
             centerTitle: true,
+              leading: IconButton(
+                onPressed: (){
+                  cubit.changeNavBarIndex(0);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 32,
+                  color: Color(0xFF484C52),
+                ),
+              ),
             title: Text(
               'Settings',
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
-              ),
-            ),
-<<<<<<< HEAD
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                'Log Out',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.red,
-                ),
-=======
-            leading: IconButton(
-              onPressed: (){
-                cubit.changeNavBarIndex(0);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                size: 32,
-                color: Color(0xFF484C52),
->>>>>>> 0667b57e3d013ee77b3ccbb51954e46bc7ad650e
               ),
             ),
           ),
@@ -135,11 +109,10 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
+
 
 class SettingsCard extends StatelessWidget {
-  final List<Map<String, dynamic>> items;
+  final List<SettingsItem> items;
   const SettingsCard({super.key, required this.items});
 
   @override
@@ -159,7 +132,7 @@ class SettingsCard extends StatelessWidget {
                     children: [
                       ListTile(
                         title: Text(
-                          item['title'],
+                          item.title,
                           style: GoogleFonts.openSans(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -248,4 +221,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }*/
->>>>>>> 0667b57e3d013ee77b3ccbb51954e46bc7ad650e

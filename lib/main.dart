@@ -25,22 +25,20 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return BlocProvider(
-      create: (context) => AppCubit(), 
-      child: MaterialApp(
-        theme: ThemeData(),
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-      ),
-=======
+    // return BlocProvider(
+    //   create: (context) => AppCubit(),
+    //   child: MaterialApp(
+    //     theme: ThemeData(),
+    //     debugShowCheckedModeBanner: false,
+    //     home: SplashScreen(),
+    //   ),
+
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFFEF7FF)
       ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
->>>>>>> 0667b57e3d013ee77b3ccbb51954e46bc7ad650e
     );
   }
 }

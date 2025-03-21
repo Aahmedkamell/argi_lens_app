@@ -100,22 +100,15 @@ class AppCubit extends Cubit<AppStates> {
 
   int currentIndex = 0;
 
-<<<<<<< HEAD
   final List<Widget> screens = [
     HomeScreen(),
     TimerScreen(),
     ScanScreen(),
     HistoryScreen(),
     SettingsScreen(),
-=======
-  List<Widget> screens = [
-    const HomeScreen(),
-    TimerScreen(),
-    const ScanScreen(),
-    const HistoryScreen(),
-    const SettingsScreen()
->>>>>>> 0667b57e3d013ee77b3ccbb51954e46bc7ad650e
   ];
+
+
 
   final List<String> svgIcons = [
     'assets/icons/home.svg',
