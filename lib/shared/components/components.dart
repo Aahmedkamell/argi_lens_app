@@ -448,9 +448,9 @@ Widget allHealthPlantBuilder() => BuildCondition(
     scrollDirection: Axis.vertical,
     physics: BouncingScrollPhysics(),
     padding: EdgeInsets.only(right: 10),
-    itemCount: 12,
+    itemCount: 13,
     itemBuilder: (context, index) {
-      if (index == 11) {
+      if (index == 12 || index == 0) {
         return SizedBox(height: 20);
       }
       return buildAllHealthPlantItem(

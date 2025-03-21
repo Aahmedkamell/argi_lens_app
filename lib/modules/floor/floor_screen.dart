@@ -37,7 +37,6 @@ class FloorScreen extends StatelessWidget {
             ),
             body: Column(
               children: [
-                SizedBox(height: 20,),
                 Expanded(child: allHealthPlantBuilder())
               ],
             ),
