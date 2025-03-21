@@ -442,24 +442,33 @@ Widget buildAllHealthPlantItem({
   ),
 );
 
-Widget allHealthPlantBuilder()=>BuildCondition(
+Widget allHealthPlantBuilder() => BuildCondition(
   condition: true,
-  builder: (context)=> ListView.separated(
-      scrollDirection: Axis.vertical,
-      physics: BouncingScrollPhysics(),
-      padding: EdgeInsets.only(right: 10),
-      itemBuilder: (context, index)=> buildAllHealthPlantItem(
+  builder: (context) => ListView.separated(
+    scrollDirection: Axis.vertical,
+    physics: BouncingScrollPhysics(),
+    padding: EdgeInsets.only(right: 10),
+    itemCount: 12,
+    itemBuilder: (context, index) {
+      if (index == 11) {
+        return SizedBox(height: 20);
+      }
+      return buildAllHealthPlantItem(
         context: context,
         floor: 'Floor ${index + 1}',
         cell: 'Cell ${index + 1}',
         healthPercentage: min(index * 10, 100),
-      ),
-      separatorBuilder: (context, index)=> SizedBox(height: 10,),
-      itemCount: 11),
-  fallback: (context)=> Center(child: CircularProgressIndicator(
-    color: ColorManager.greenColor,
-  )),
+      );
+    },
+    separatorBuilder: (context, index) => SizedBox(height: 10),
+  ),
+  fallback: (context) => Center(
+    child: CircularProgressIndicator(
+      color: ColorManager.greenColor,
+    ),
+  ),
 );
+
 
 Widget sensorReading ({
   required String? sensorName,

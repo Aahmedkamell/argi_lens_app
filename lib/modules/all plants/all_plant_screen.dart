@@ -42,7 +42,7 @@ class AllPlantScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 20,),
-          Expanded(child: allHealthPlantBuilder())
+          Expanded(child: allHealthPlantBuilder()),
         ],
       ),
     );
