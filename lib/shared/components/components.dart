@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../modules/floor/floor_screen.dart';
-import '../../modules/plant details/plant_details_screen.dart';
+
+import '../../modules/home/floor/floor_screen.dart';
+import '../../modules/home/plant details/plant_details_screen.dart';
 import '../styles/colors.dart';
 
 Widget defaultFormField({
@@ -468,7 +469,6 @@ Widget allHealthPlantBuilder() => BuildCondition(
     ),
   ),
 );
-
 
 Widget sensorReading ({
   required String? sensorName,

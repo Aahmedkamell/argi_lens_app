@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../shared/components/components.dart';
-import '../../shared/styles/colors.dart';
+import '../../../shared/components/components.dart';
+import '../../../shared/styles/colors.dart';
+
+
 
 class PlantDetailsScreen extends StatelessWidget {
   final String floor;

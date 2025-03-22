@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:agre_lens_app/modules/all%20plants/all_plant_screen.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../shared/components/components.dart';
 import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
+import 'all plants/all_plant_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

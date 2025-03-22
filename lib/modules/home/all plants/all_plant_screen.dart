@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../shared/components/components.dart';
-import '../../shared/cubit/cubit.dart';
-import '../../shared/cubit/states.dart';
-import '../../shared/styles/colors.dart';
+import '../../../shared/components/components.dart';
+import '../../../shared/cubit/cubit.dart';
+import '../../../shared/cubit/states.dart';
+
 
 class AllPlantScreen extends StatelessWidget {
   const AllPlantScreen({super.key});
