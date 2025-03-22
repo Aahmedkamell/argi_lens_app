@@ -1,91 +1,128 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:agre_lens_app/shared/cubit/notification_cubit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => NotificationCubit(),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          centerTitle: true,
-          title: Text(
-            'Notifications',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+      child: const NotificationsView(),
+    );
+  }
+}
+
+class NotificationsView extends StatelessWidget {
+  const NotificationsView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final sections = [
+      NotificationSectionData(
+        title: 'Common',
+        items: [
+          NotificationItemData(
+            label: 'General Notification',
+            toggleCallback: (cubit, value) => cubit.toggleGeneral(value),
+            selector: (state) => state.generalNotification,
           ),
-          iconTheme: IconThemeData(color: Colors.black),
+          NotificationItemData(
+            label: 'Sound',
+            toggleCallback: (cubit, value) => cubit.toggleSound(value),
+            selector: (state) => state.sound,
+          ),
+          NotificationItemData(
+            label: 'Vibrate',
+            toggleCallback: (cubit, value) => cubit.toggleVibrate(value),
+            selector: (state) => state.vibrate,
+          ),
+        ],
+      ),
+      NotificationSectionData(
+        title: 'System & services update',
+        items: [
+          NotificationItemData(
+            label: 'App updates',
+            toggleCallback: (cubit, value) => cubit.toggleSystemUpdates(value),
+            selector: (state) => state.systemUpdates,
+          ),
+          NotificationItemData(
+            label: 'Bill Reminder',
+            toggleCallback: (cubit, value) => cubit.toggleBillReminder(value),
+            selector: (state) => state.billReminder,
+          ),
+          NotificationItemData(
+            label: 'Promotion',
+            toggleCallback: (cubit, value) => cubit.togglePromotion(value),
+            selector: (state) => state.promotion,
+          ),
+          NotificationItemData(
+            label: 'Discount Available',
+            toggleCallback: (cubit, value) => cubit.toggleDiscount(value),
+            selector: (state) => state.discountAvailable,
+          ),
+          NotificationItemData(
+            label: 'Payment Request',
+            toggleCallback: (cubit, value) => cubit.togglePaymentRequest(value),
+            selector: (state) => state.paymentRequest,
+          ),
+        ],
+      ),
+      NotificationSectionData(
+        title: 'Others',
+        items: [
+          NotificationItemData(
+            label: 'New Service Available',
+            toggleCallback: (cubit, value) => cubit.toggleNewService(value),
+            selector: (state) => state.newServiceAvailable,
+          ),
+          NotificationItemData(
+            label: 'New Tips Available',
+            toggleCallback: (cubit, value) => cubit.toggleNewTips(value),
+            selector: (state) => state.newTipsAvailable,
+          ),
+        ],
+      ),
+    ];
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Notifications',
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+        child: SingleChildScrollView(
           child: Column(
-            children: [
-              NotificationSection(
-                title: 'System & services update',
-                notifications: [
-                  NotificationItem(
-                    label: 'App updates',
-                    toggleCallback: (context, value) => context
-                        .read<NotificationCubit>()
-                        .toggleSystemUpdates(value),
-                    toggleSelector: (state) => state.systemUpdates,
+            children: sections
+                .asMap()
+                .entries
+                .map(
+                  (entry) => Column(
+                    children: [
+                      NotificationSection(section: entry.value),
+                      if (entry.key != sections.length - 1)
+                        const Divider(
+                          thickness: 1,
+                          color: Color(0xFFEEEEEE),
+                          height: 24,
+                        ),
+                    ],
                   ),
-                  NotificationItem(
-                    label: 'Bill Reminder',
-                    toggleCallback: (context, value) => context
-                        .read<NotificationCubit>()
-                        .toggleBillReminder(value),
-                    toggleSelector: (state) => state.billReminder,
-                  ),
-                  NotificationItem(
-                    label: 'Promotion',
-                    toggleCallback: (context, value) => context
-                        .read<NotificationCubit>()
-                        .togglePromotion(value),
-                    toggleSelector: (state) => state.promotion,
-                  ),
-                  NotificationItem(
-                    label: 'Discount Available',
-                    toggleCallback: (context, value) =>
-                        context.read<NotificationCubit>().toggleDiscount(value),
-                    toggleSelector: (state) => state.discountAvailable,
-                  ),
-                  NotificationItem(
-                    label: 'Payment Request',
-                    toggleCallback: (context, value) => context
-                        .read<NotificationCubit>()
-                        .togglePaymentRequest(value),
-                    toggleSelector: (state) => state.paymentRequest,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              NotificationSection(
-                title: 'Others',
-                notifications: [
-                  NotificationItem(
-                    label: 'New Service Available',
-                    toggleCallback: (context, value) => context
-                        .read<NotificationCubit>()
-                        .toggleNewService(value),
-                    toggleSelector: (state) => state.newServiceAvailable,
-                  ),
-                  NotificationItem(
-                    label: 'New Tips Available',
-                    toggleCallback: (context, value) =>
-                        context.read<NotificationCubit>().toggleNewTips(value),
-                    toggleSelector: (state) => state.newTipsAvailable,
-                  ),
-                ],
-              ),
-            ],
+                )
+                .toList(),
           ),
         ),
       ),
@@ -93,43 +130,78 @@ class NotificationsScreen extends StatelessWidget {
   }
 }
 
-class NotificationSection extends StatelessWidget {
+class NotificationSectionData {
   final String title;
-  final List<NotificationItem> notifications;
+  final List<NotificationItemData> items;
 
-  const NotificationSection({
-    Key? key,
-    required this.title,
-    required this.notifications,
-  }) : super(key: key);
+  NotificationSectionData({required this.title, required this.items});
+}
+
+class NotificationItemData {
+  final String label;
+  final Function(NotificationCubit, bool) toggleCallback;
+  final bool Function(NotificationState) selector;
+
+  NotificationItemData({
+    required this.label,
+    required this.toggleCallback,
+    required this.selector,
+  });
+}
+
+class NotificationSection extends StatelessWidget {
+  final NotificationSectionData section;
+
+  const NotificationSection({Key? key, required this.section})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              section.title,
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                height: 1.5,
+                letterSpacing: 0.1,
+              ),
             ),
           ),
-          SizedBox(height: 12),
-          Column(
-            children: [
-              for (int i = 0; i < notifications.length; i++) ...[
-                notifications[i],
-                if (i != notifications.length - 1)
-                  Divider(thickness: 1, color: Color(0xFFEEEEEE)),
-              ]
-            ],
+          const SizedBox(height: 12),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              children: section.items
+                  .asMap()
+                  .entries
+                  .map(
+                    (entry) => Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: NotificationItem(item: entry.value),
+                        ),
+                        if (entry.key != section.items.length - 1)
+                          const Divider(
+                            thickness: 1,
+                            color: Colors.transparent,
+                            height: 1,
+                          ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ],
       ),
@@ -138,45 +210,39 @@ class NotificationSection extends StatelessWidget {
 }
 
 class NotificationItem extends StatelessWidget {
-  final String label;
-  final Function(BuildContext, bool) toggleCallback;
-  final bool Function(NotificationState) toggleSelector;
+  final NotificationItemData item;
 
-  const NotificationItem({
-    Key? key,
-    required this.label,
-    required this.toggleCallback,
-    required this.toggleSelector,
-  }) : super(key: key);
+  const NotificationItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotificationCubit, NotificationState>(
       builder: (context, state) {
+        final cubit = context.read<NotificationCubit>();
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                label,
-                style: TextStyle(
+                item.label,
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Transform.scale(
-                scale: 1,
-                child: SizedBox(
-                  width: 40,
-                  height: 20,
+              SizedBox(
+                width: 40,
+                height: 20,
+                child: Transform.scale(
+                  scale: 1.0,
                   child: Switch(
-                    value: toggleSelector(state),
-                    onChanged: (value) => toggleCallback(context, value),
+                    value: item.selector(state),
+                    onChanged: (value) => item.toggleCallback(cubit, value),
                     activeColor: Colors.white,
-                    activeTrackColor: Color(0xFF4CAF50),
+                    activeTrackColor: const Color(0xFF4CAF50),
                     inactiveThumbColor: Colors.white,
-                    inactiveTrackColor: Colors.grey.shade400,
+                    inactiveTrackColor: const Color(0xFFD9D9D9),
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                 ),
