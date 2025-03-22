@@ -45,7 +45,7 @@ class PlantDetailsScreen extends StatelessWidget {
                     'assets/images/plant_details.jpeg',
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height / 3,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

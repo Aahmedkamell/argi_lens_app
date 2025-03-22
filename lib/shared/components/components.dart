@@ -483,132 +483,142 @@ Widget allHealthPlantBuilder() => BuildCondition(
   ),
 );
 
+List<Widget> historyWidgets = [];
+
 Widget buildHistoryItem({
   required int reportNum,
   required int reportSerial,
   required int healthPrecentage,
-
-})=> InkWell(
-  onTap: (){},
-  child: SizedBox(
-    height: 60,
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            'assets/images/plant health.jpeg',
-            width: 52,
-            height: 52,
-            fit: BoxFit.cover,
+}) {
+  return InkWell(
+    onTap: () {},
+    child: SizedBox(
+      height: 60,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              'assets/images/plant health.jpeg',
+              width: 52,
+              height: 52,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        SizedBox(width: 10,),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  'Report $reportNum',
-                  style: TextStyle(
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    'Report $reportNum',
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
-                      color: Color(0xFF26273A)
+                      color: Color(0xFF26273A),
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                'Report Serial',
-                style: TextStyle(
+                Text(
+                  'Report Serial',
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black45
-                ),
-              ),
-              Text(
-                '$reportSerial',
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF26273A)
-                ),
-              ),
-            ],
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(
-              height: 20,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: getColorOfStats(healthPrecentage),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  '$healthPrecentage%',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: Colors.white,
+                    color: Colors.black45,
                   ),
                 ),
-              ),
+                Text(
+                  '$reportSerial',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF26273A),
+                  ),
+                ),
+              ],
             ),
-            Expanded(child: Container()),
-            Row(children: [
-              Text(
-                '02 Jan 2025',
-                style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black45
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                height: 20,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: getColorOfStats(healthPrecentage),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    '$healthPrecentage%',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(width: 10,),
-              Text(
-                '11:00 AM',
-                style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black45
-                ),
-              ),
-            ],)
-          ],
-        )
-      ],
+              Expanded(child: Container()),
+              Row(
+                children: [
+                  Text(
+                    '02 Jan 2025',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    '11:00 AM',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black45,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
+      ),
     ),
-  ),
-);
+  );
+}
 
 Widget historyItemBuilder() {
+  List<Widget> historyWidgets = [];
 
-  return BuildCondition(
-    condition: true,
-    builder: (context) => ListView.separated(
-      reverse: true,
-      scrollDirection: Axis.vertical,
-      physics: BouncingScrollPhysics(),
-      padding: EdgeInsets.only(right: 10),
-      itemCount: 22,
-      itemBuilder: (context, index) {
-        int randomNumber = Random().nextInt(101);
-        if (index == 21 || index == 0) {
-          return SizedBox(height: 10);
-        }
-        return buildHistoryItem(
+  for (int index = 0; index < 22; index++) {
+    int randomNumber = Random().nextInt(101);
+    if (index == 21 || index == 0) {
+      historyWidgets.add(SizedBox(height: 10));
+    } else {
+      historyWidgets.add(
+        buildHistoryItem(
           healthPrecentage: randomNumber,
           reportNum: index,
           reportSerial: 6980945543 + randomNumber - 1,
-        );
-      },
-      separatorBuilder: (context, index) => SizedBox(height: 10),
+        ),
+      );
+    }
+  }
+
+  List<Widget> reversedHistoryWidgets = historyWidgets.reversed.toList();
+
+  return BuildCondition(
+    condition: true,
+    builder: (context) => SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        children: reversedHistoryWidgets,
+      ),
     ),
     fallback: (context) => Center(
       child: CircularProgressIndicator(
@@ -617,8 +627,6 @@ Widget historyItemBuilder() {
     ),
   );
 }
-
-
 
 Widget sensorReading ({
   required String? sensorName,
