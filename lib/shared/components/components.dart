@@ -140,6 +140,12 @@ Widget defaultButton({
   ),
 );
 
+List<Map<String, dynamic>> plantItems = List.generate(11, (index) => {
+  "floor": "Floor ${index + 1}",
+  "cell": "Cell ${index + 1}",
+  "healthPercentage": min(index * 10, 100),
+});
+
 Widget buildHealthPlantItem({
   required BuildContext context,
   required String floor,
@@ -196,7 +202,7 @@ Widget buildHealthPlantItem({
             width: 70,
             decoration: BoxDecoration(
               border: Border.all(
-                  color: getHealthColor(healthPercentage),
+                  color: getColorOfStats(healthPercentage),
               ),
               shape: BoxShape.circle,
             ),
@@ -206,7 +212,7 @@ Widget buildHealthPlantItem({
             width: 60,
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: getHealthColor(healthPercentage),
+                    color: getColorOfStats(healthPercentage),
                 ),
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.55)
@@ -241,8 +247,8 @@ Widget healthPlantBuilder()=>BuildCondition(
       padding: EdgeInsets.only(right: 10),
       itemBuilder: (context, index)=> buildHealthPlantItem(
         context: context,
-        floor: 'Floor ${index + 1}',
-        cell: 'Cell ${index + 1}',
+        floor: "Floor ${index + 1}",
+        cell: "Cell ${index + 1}",
         healthPercentage: min(index * 10, 100),
       ),
       separatorBuilder: (context, index)=> SizedBox(width: 15,),
@@ -252,7 +258,10 @@ Widget healthPlantBuilder()=>BuildCondition(
   )),
 );
 
-Widget buildFloorPlantItem(BuildContext context)=> Container(
+Widget buildFloorPlantItem({
+  required BuildContext context,
+  required int floorNum,
+})=> Container(
   height: 152,
   width: 140,
   padding: EdgeInsets.only(right: 16,left: 16,top: 16),
@@ -285,7 +294,7 @@ Widget buildFloorPlantItem(BuildContext context)=> Container(
         children: [
           Expanded(
             child: Text(
-              'Floor 1',
+              'Floor $floorNum',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -297,7 +306,7 @@ Widget buildFloorPlantItem(BuildContext context)=> Container(
             onTap: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => FloorScreen()),
+                MaterialPageRoute(builder: (context) => FloorScreen(floorNum:floorNum)),
               );
             },
             child: Container(
@@ -327,7 +336,10 @@ Widget floorPlantBuilder()=>BuildCondition(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.only(right: 10),
-      itemBuilder: (context, index)=> buildFloorPlantItem(context),
+      itemBuilder: (context, index)=> buildFloorPlantItem(
+        context: context,
+        floorNum: index+1
+      ),
       separatorBuilder: (context, index)=> SizedBox(width: 15,),
       itemCount: 5),
   fallback: (context)=> Center(child: CircularProgressIndicator(
@@ -393,7 +405,7 @@ Widget buildAllHealthPlantItem({
                   width: 70,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: getHealthColor(healthPercentage),
+                        color: getColorOfStats(healthPercentage),
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -403,7 +415,7 @@ Widget buildAllHealthPlantItem({
                   width: 60,
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: getHealthColor(healthPercentage),
+                          color: getColorOfStats(healthPercentage),
                       ),
                       shape: BoxShape.circle,
                       color: Colors.white.withOpacity(0.55)
@@ -456,9 +468,9 @@ Widget allHealthPlantBuilder() => BuildCondition(
       }
       return buildAllHealthPlantItem(
         context: context,
-        floor: 'Floor ${index + 1}',
-        cell: 'Cell ${index + 1}',
-        healthPercentage: min(index * 10, 100),
+        floor: 'Floor $index',
+        cell: 'Cell $index',
+        healthPercentage: min((index-1) * 10, 100),
       );
     },
     separatorBuilder: (context, index) => SizedBox(height: 10),
@@ -479,7 +491,7 @@ Widget sensorReading ({
   decoration: BoxDecoration(
     color: Color(0xFFFAFAFA),
     borderRadius: BorderRadius.circular(10),
-    border: Border.all(color: ColorManager.greenColor),
+    border: Border.all(color: getColorOfStats(sensorStats!)),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.3),
@@ -506,7 +518,7 @@ Widget sensorReading ({
         Text(
           '$sensorStats%',
           style: TextStyle(
-              color: ColorManager.greenColor,
+              color: getColorOfStats(sensorStats!),
               fontSize: 18,
               fontWeight: FontWeight.w600
           ),
@@ -568,14 +580,16 @@ Widget timerButton({
   ),
 );
 
-Color getHealthColor(int healthPercentage) {
-  if (healthPercentage <= 50) {
-    return ColorManager.redColor; // يبقى اللون أحمر حتى 50%
-  } else if (healthPercentage <= 75) {
-    return Color.lerp(ColorManager.redColor, ColorManager.yellowColor, (healthPercentage - 50) / 25)!;
-  } else {
-    return Color.lerp(ColorManager.yellowColor, ColorManager.greenColor, (healthPercentage - 75) / 25)!;
+Color getColorOfStats(int stats) {
+  if (stats <= 50) {
+    return ColorManager.redColor;
+  } else if (stats <= 75) {
+    return ColorManager.yellowColor;  }
+  else {
+    return ColorManager.greenColor;
   }
 }
+
+
 
 

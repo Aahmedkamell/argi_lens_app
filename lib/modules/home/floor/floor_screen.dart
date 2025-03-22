@@ -7,7 +7,8 @@ import '../../../shared/cubit/states.dart';
 
 
 class FloorScreen extends StatelessWidget {
-  const FloorScreen({super.key});
+  final int floorNum;
+  const FloorScreen({super.key, required this.floorNum});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class FloorScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Floor 1',
+                'Floor $floorNum',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500
