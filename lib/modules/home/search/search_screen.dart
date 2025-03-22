@@ -23,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    searchResults = List.from(widget.items); // عرض كل العناصر عند فتح الصفحة
+    searchResults = List.from(widget.items);
     isLoading = false;
     Future.delayed(Duration(milliseconds: 300), () {
       FocusScope.of(context).requestFocus(_focusNode);
@@ -31,6 +31,10 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _search(String query) {
+    setState(() {
+      isLoading = true;
+    });
+
     if (query.isEmpty) {
       setState(() {
         searchResults = List.from(widget.items); // إعادة كل العناصر إذا كان البحث فارغًا
@@ -40,37 +44,56 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     setState(() {
-      isLoading = true;
-    });
+      searchResults = widget.items.where((item) {
+        String floorText = "floor ${item["floor"]}".toLowerCase();
+        String cellText = "cell ${item["cell"]}".toLowerCase();
+        String combinedText = "$floorText $cellText";
 
-    Future.delayed(Duration(milliseconds: 500), () {
-      if (_searchController.text.trim().toLowerCase() != query.trim().toLowerCase()) {
-        return;
-      }
+        // دالة تقسيم النصوص إلى أجزاء بدون مسافات
+        List<String> splitWords(String text) {
+          return RegExp(r'[a-zA-Z]+|\d+')
+              .allMatches(text.toLowerCase())
+              .map((match) => match.group(0)!)
+              .toList();
+        }
 
-      setState(() {
-        searchResults = widget.items.where((item) {
-          String floorText = "floor ${item["floor"]}".toLowerCase();
-          String cellText = "cell ${item["cell"]}".toLowerCase();
-          String combinedText = "$floorText $cellText";
+        List<String> queryWords = splitWords(query);
+        List<String> itemWords = splitWords(combinedText);
 
-          List<String> splitWords(String text) {
-            return RegExp(r'[a-zA-Z]+|\d+')
-                .allMatches(text.toLowerCase())
-                .map((match) => match.group(0)!)
-                .toList();
-          }
+        // تحقق إذا كانت جميع الكلمات في البحث موجودة في العناصر
+        return queryWords.every((word) => itemWords.any((itemWord) => itemWord.contains(word)));
+      }).toList();
 
-          List<String> queryWords = splitWords(query);
-          List<String> itemWords = splitWords(combinedText);
-
-          return queryWords.every((word) => itemWords.contains(word));
-        }).toList();
-
-        isLoading = false;
-      });
+      isLoading = false;
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
