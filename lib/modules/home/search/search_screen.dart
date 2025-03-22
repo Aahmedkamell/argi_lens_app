@@ -168,11 +168,12 @@ class _SearchPageState extends State<SearchPage> {
                     onPressed: () {
                       _searchController.clear();
                       setState(() {
-                        searchResults = [];
+                        searchResults = List.from(widget.items); // إعادة عرض كل العناصر
                       });
                     },
                   )
                       : null,
+
                   hintText: "Search",
                   hintStyle: GoogleFonts.reemKufi(
                     fontWeight: FontWeight.bold,
