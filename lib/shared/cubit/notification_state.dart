@@ -1,6 +1,7 @@
+
 part of 'notification_cubit.dart';
 
-class NotificationState {
+class NotificationState extends Equatable{
   final bool generalNotification;
   final bool sound;
   final bool vibrate;

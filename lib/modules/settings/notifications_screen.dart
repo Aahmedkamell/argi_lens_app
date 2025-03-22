@@ -55,7 +55,7 @@ class NotificationsScreen extends StatelessWidget {
                     label: 'Discount Available',
                     toggleCallback: (context, value) =>
                         context.read<NotificationCubit>().toggleDiscount(value),
-                    toggleSelector: (state) => state.discount,
+                    toggleSelector: (state) => state.discountAvailable,
                   ),
                   NotificationItem(
                     label: 'Payment Request',
@@ -75,13 +75,13 @@ class NotificationsScreen extends StatelessWidget {
                     toggleCallback: (context, value) => context
                         .read<NotificationCubit>()
                         .toggleNewService(value),
-                    toggleSelector: (state) => state.newService,
+                    toggleSelector: (state) => state.newServiceAvailable,
                   ),
                   NotificationItem(
                     label: 'New Tips Available',
                     toggleCallback: (context, value) =>
                         context.read<NotificationCubit>().toggleNewTips(value),
-                    toggleSelector: (state) => state.newTips,
+                    toggleSelector: (state) => state.newTipsAvailable,
                   ),
                 ],
               ),

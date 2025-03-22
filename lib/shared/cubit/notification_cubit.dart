@@ -1,5 +1,6 @@
-import 'package:agre_lens_app/shared/cubit/notification_state.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+part 'notification_state.dart';
 
 
 class NotificationCubit extends Cubit<NotificationState> {
@@ -18,7 +19,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   void toggleDiscount(bool value) {
-    emit(state.copyWith(discount: value));
+    emit(state.copyWith(discountAvailable: value));
   }
 
   void togglePaymentRequest(bool value) {
@@ -26,10 +27,10 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   void toggleNewService(bool value) {
-    emit(state.copyWith(newService: value));
+    emit(state.copyWith(newServiceAvailable: value));
   }
 
   void toggleNewTips(bool value) {
-    emit(state.copyWith(newTips: value));
+    emit(state.copyWith(newTipsAvailable: value));
   }
 }

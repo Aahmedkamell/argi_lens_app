@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:agre_lens_app/modules/all%20plants/all_plant_screen.dart';
+import 'package:agre_lens_app/modules/home/search/search_screen.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../shared/components/components.dart';
 import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
+import 'all plants/all_plant_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -50,6 +51,15 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 23),
                   child: TextField(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SearchPage(
+                          items: plantItems,
+                        )),
+                      );
+                    },
+                    readOnly: true,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search, color: Color(0xFF414042)),
                       hintText: "Search",
@@ -110,14 +120,11 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      InkWell(
-                        onTap: (){},
-                        child: Text('All Floors',
-                          style: GoogleFonts.reemKufi(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF414042)
-                          ),
+                      Text('All Floors',
+                        style: GoogleFonts.reemKufi(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF414042)
                         ),
                       ),
                       Icon(Icons.keyboard_arrow_right, color: Color(0xFF414042),)
@@ -140,9 +147,9 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Expanded(child: sensorReading(sensorName: 'Water', sensorStats: 92)),
+                      Expanded(child: sensorReading(sensorName: 'Water', sensorStats: 20)),
                       SizedBox(width: 10,),
-                      Expanded(child: sensorReading(sensorName: 'PH', sensorStats: 96)),
+                      Expanded(child: sensorReading(sensorName: 'PH', sensorStats: 63)),
                       SizedBox(width: 10,),
                       Expanded(child: sensorReading(sensorName: 'DHT', sensorStats: 94)),
                     ],
