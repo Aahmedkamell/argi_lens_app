@@ -23,14 +23,17 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    searchResults = []; // الصفحة تكون فارغة عند الفتح
+    searchResults = List.from(widget.items); // عرض كل العناصر عند فتح الصفحة
     isLoading = false;
+    Future.delayed(Duration(milliseconds: 300), () {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
   }
 
   void _search(String query) {
     if (query.isEmpty) {
       setState(() {
-        searchResults.clear();
+        searchResults = List.from(widget.items); // إعادة كل العناصر إذا كان البحث فارغًا
         isLoading = false;
       });
       return;
@@ -42,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
 
     Future.delayed(Duration(milliseconds: 500), () {
       if (_searchController.text.trim().toLowerCase() != query.trim().toLowerCase()) {
-        return; // إذا تغير البحث أثناء الانتظار، تجاهل النتائج
+        return;
       }
 
       setState(() {
@@ -51,7 +54,6 @@ class _SearchPageState extends State<SearchPage> {
           String cellText = "cell ${item["cell"]}".toLowerCase();
           String combinedText = "$floorText $cellText";
 
-          // البحث حتى لو كتب المستخدم "floor1cell1" بدون مسافات
           List<String> splitWords(String text) {
             return RegExp(r'[a-zA-Z]+|\d+')
                 .allMatches(text.toLowerCase())
@@ -63,18 +65,12 @@ class _SearchPageState extends State<SearchPage> {
           List<String> itemWords = splitWords(combinedText);
 
           return queryWords.every((word) => itemWords.contains(word));
-
-
         }).toList();
 
         isLoading = false;
       });
     });
   }
-
-
-
-
 
 
 
@@ -144,6 +140,8 @@ class _SearchPageState extends State<SearchPage> {
                 controller: _searchController,
                 focusNode: _focusNode,
                 onChanged: _search,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
                 style: GoogleFonts.reemKufi(
                     fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF414042)),
                 decoration: InputDecoration(
