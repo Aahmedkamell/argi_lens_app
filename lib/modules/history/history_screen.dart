@@ -2,7 +2,9 @@ import 'package:agre_lens_app/modules/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared/components/components.dart';
 import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
 import '../../shared/styles/colors.dart';
@@ -18,14 +20,20 @@ class HistoryScreen extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: (){
-                cubit.changeNavBarIndex(0);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                size: 32,
-                color: Color(0xFF484C52),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: InkWell(
+                onTap: (){
+                  cubit.changeNavBarIndex(0);
+                },
+                child: Transform.scale(
+                  scale: 0.8,
+                  child: SvgPicture.asset(
+                    'assets/icons/ep_back.svg',
+                    width: 32,
+                    height: 32,
+                  ),
+                ),
               ),
             ),
             centerTitle: true,
@@ -60,12 +68,14 @@ class HistoryScreen extends StatelessWidget {
             ],
           ),
           body: Center(
-            child: Text(
-              'History',
-              style: TextStyle(
-                  fontSize: 25
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Expanded(child: historyItemBuilder())
+                ],
               ),
-            ),
+            )
           ),
         );
       },

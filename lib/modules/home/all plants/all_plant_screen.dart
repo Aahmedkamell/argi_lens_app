@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/components/components.dart';
@@ -28,14 +29,20 @@ class AllPlantScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: 32,
-            color: Color(0xFF484C52),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: InkWell(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Transform.scale(
+              scale: 0.8,
+              child: SvgPicture.asset(
+                'assets/icons/ep_back.svg',
+                width: 32,
+                height: 32,
+              ),
+            ),
           ),
         ),
       ),

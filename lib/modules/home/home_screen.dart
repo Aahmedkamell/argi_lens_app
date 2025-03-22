@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Padding(padding: EdgeInsets.only(left: 22),
           child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             physics: BouncingScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.min,
