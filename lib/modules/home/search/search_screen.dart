@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/components/components.dart';
@@ -67,35 +68,6 @@ class _SearchPageState extends State<SearchPage> {
       isLoading = false;
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   Widget _buildLoadingSkeleton() {
     return Padding(
@@ -173,11 +145,21 @@ class _SearchPageState extends State<SearchPage> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(Icons.arrow_back, size: 28, color: Color(0xFF484C52)),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Transform.scale(
+                              scale: 1,
+                              child: SvgPicture.asset(
+                                'assets/icons/ep_back.svg',
+                                width: 32,
+                                height: 32,
+                              ),
+                            ),
+                          ),
                         ),
                         Container(width: 1.5, height: 22, decoration: BoxDecoration(color: Color(0xFF979797),borderRadius: BorderRadius.circular(1.5)),),
                         SizedBox(width: 8),

@@ -23,7 +23,22 @@ class ProfileScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             elevation: 0,
             centerTitle: true,
-            leading: const BackButton(color: Colors.black),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Transform.scale(
+                  scale: 0.8,
+                  child: SvgPicture.asset(
+                    'assets/icons/ep_back.svg',
+                    width: 32,
+                    height: 32,
+                  ),
+                ),
+              ),
+            ),
             title: Text(
               'Profile',
               style: GoogleFonts.poppins(
@@ -42,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                     width: 24,
                     height: 24,
 
-                    color: Colors.black,
+                    color: Color(0xFF475569)
                   ),
                 ),
               ),
