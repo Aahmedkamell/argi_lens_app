@@ -3,7 +3,6 @@ import 'package:agre_lens_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:agre_lens_app/modules/Boardina/Boardina2_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Boardina2_screen.dart';
 import 'package:agre_lens_app/modules/login/login_screen.dart';
