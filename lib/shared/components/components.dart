@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:agre_lens_app/modules/history/report/report_screen.dart';
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -489,9 +490,21 @@ Widget buildHistoryItem({
   required int reportNum,
   required int reportSerial,
   required int healthPrecentage,
+  required BuildContext context,
 }) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ReportScreen(
+            reportNum: reportNum,
+            serialNum: reportSerial,
+            healthPrecentage: healthPrecentage,
+          )
+        ),
+      );
+    },
     child: SizedBox(
       height: 60,
       child: Row(
@@ -592,7 +605,7 @@ Widget buildHistoryItem({
   );
 }
 
-Widget historyItemBuilder() {
+Widget historyItemBuilder(BuildContext context) {
   List<Widget> historyWidgets = [];
 
   for (int index = 0; index < 22; index++) {
@@ -602,11 +615,13 @@ Widget historyItemBuilder() {
     } else {
       historyWidgets.add(
         buildHistoryItem(
+          context: context,  // pass context here
           healthPrecentage: randomNumber,
           reportNum: index,
           reportSerial: 6980945543 + randomNumber - 1,
         ),
       );
+      historyWidgets.add(SizedBox(height: 10));
     }
   }
 
@@ -677,6 +692,8 @@ Widget sensorReading ({
 Widget detailesText ({
   required String headText,
   required String bodyText,
+  Color headColor = ColorManager.greenColor,
+  Color bodyColor = const Color(0xFF494949),
 })=> Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
@@ -685,7 +702,7 @@ Widget detailesText ({
       style: GoogleFonts.reemKufi(
         fontWeight: FontWeight.w700,
         fontSize: 20,
-        color: ColorManager.greenColor
+        color: headColor
       ),
     ),
     SizedBox(height: 15,),
@@ -694,7 +711,7 @@ Widget detailesText ({
       style: GoogleFonts.reemKufi(
           fontWeight: FontWeight.w400,
           fontSize: 14,
-          color: Color(0xFF494949)
+          color: bodyColor
       ),
     ),
   ],

@@ -32,38 +32,43 @@ class AppInfoScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  SizedBox(height: 70),
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: 236,
-                    height: 217,
+        body:SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 70),
+                      Image.asset(
+                        'assets/images/logo.png',
+                        width: 236,
+                        height: 217,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Version: 0.0.1',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black38,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Version: 0.0.1',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black38,
-                    ),
-                  ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 6, bottom: 20),
-                child: AppInfoFooter(),
-              ),
-              
-            ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 6, bottom: 20),
+                  child: AppInfoFooter(),
+                ),
+              ],
+            ),
           ),
-        ),
+        )
+
       ),
     );
   }

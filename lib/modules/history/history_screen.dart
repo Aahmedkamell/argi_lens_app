@@ -20,6 +20,7 @@ class HistoryScreen extends StatelessWidget {
         var cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+
             leading: Padding(
               padding: const EdgeInsets.only(left: 10),
               child: InkWell(
@@ -72,7 +73,7 @@ class HistoryScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Expanded(child: historyItemBuilder())
+                  Expanded(child: historyItemBuilder(context))
                 ],
               ),
             )

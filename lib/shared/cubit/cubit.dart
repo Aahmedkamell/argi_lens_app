@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:agre_lens_app/modules/history/history_screen.dart';
 import 'package:agre_lens_app/modules/home/home_screen.dart';
 import 'package:agre_lens_app/modules/scan/scan_screen.dart';
@@ -5,22 +7,28 @@ import 'package:agre_lens_app/modules/settings/settings_screen.dart';
 import 'package:agre_lens_app/modules/timer/timer_screen.dart';
 import 'package:agre_lens_app/shared/cubit/states.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppCubit extends Cubit<AppStates> {
-  AppCubit() : super(AppInitialStates()){
+
+  AppCubit() : super(AppInitialStates()) {
     hourController = FixedExtentScrollController(initialItem: selectedHour);
     minuteController = FixedExtentScrollController(initialItem: selectedMinute);
     _init();
   }
+
   void _init() async {
     await loadSavedTimer();
   }
 
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
+
+
+
 
   int healthPlantPrecentage = 45;
 
