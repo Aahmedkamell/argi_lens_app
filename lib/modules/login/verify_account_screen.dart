@@ -1,5 +1,6 @@
 import 'package:agre_lens_app/modules/login/reset_password_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../layout/app_layout.dart';
 import '../../shared/components/components.dart';
@@ -65,6 +66,21 @@ class _VerifyAccountState extends State<VerifyAccount> {
                           color: Color(0xFF414042),
                           fontSize: 32,
                           fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 50,
+                    left: 26,
+                    child: InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: Transform.scale(
+                        scale: 1,
+                        child: SvgPicture.asset(
+                          'assets/icons/ep_back.svg',
+                          width: 32,
+                          height: 32,
                         ),
                       ),
                     ),
