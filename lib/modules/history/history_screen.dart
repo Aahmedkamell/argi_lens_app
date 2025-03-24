@@ -400,28 +400,32 @@ class _HistoryScreenState extends State<HistoryScreen> {
     }
   }
   Widget _dateBox(String date) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      decoration: BoxDecoration(
-        color: Color(0xFFFEF7FF),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Color(0xFFE0E8F2)),
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            'assets/icons/Calendar.svg',
-            width: 14,
-            height: 16,
+    return BlocBuilder<AppCubit, AppStates>(
+      builder: (context, state) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          decoration: BoxDecoration(
+            color: Color(0xFFFEF7FF),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Color(0xFFE0E8F2)),
           ),
-          const SizedBox(width: 5),
-          Text(date, style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Color(0xFF26273A)
-          )),
-        ],
-      ),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                'assets/icons/Calendar.svg',
+                width: 14,
+                height: 16,
+              ),
+              const SizedBox(width: 5),
+              Text(date, style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  color: Color(0xFF26273A)
+              )),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -439,9 +443,12 @@ class CustomButton extends StatelessWidget {
         var cubit = AppCubit.get(context);
         bool isSelected = cubit.selectedButton == text;
 
+
         return GestureDetector(
           onTap: () {
             cubit.selectButton(text);
+            cubit.startDate = "Select Start";
+            cubit.endDate = "Select End";
           },
           child: AnimatedContainer(
             duration: Duration(milliseconds: 200),

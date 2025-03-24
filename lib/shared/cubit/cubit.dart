@@ -39,6 +39,9 @@ class AppCubit extends Cubit<AppStates> {
     selectedDateRange = range;
     startDate = DateFormat('dd MMM yyyy').format(range.start);
     endDate = DateFormat('dd MMM yyyy').format(range.end);
+    if(selectedDateRange != null) {
+      resetFilter();
+    }
     emit(DateRangeUpdatedState()); // تأكد من وجود هذه الحالة
   }
   void clearDateRange() {
