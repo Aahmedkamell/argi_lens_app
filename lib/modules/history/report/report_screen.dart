@@ -513,6 +513,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: detailesText(
+                                  headColor: Color(0xFF484C52),
                                   headText: 'Status:',
                                   bodyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet, in. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.',
                                 ),
@@ -521,6 +522,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: detailesText(
+                                  headColor: Color(0xFF484C52),
                                   headText: 'Recommendation:',
                                   bodyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet, in. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.',
                                 ),

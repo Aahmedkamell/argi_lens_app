@@ -11,6 +11,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -27,6 +28,70 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
 
+  String selectedButton = '';
+  String selectedButton2 = '';
+
+  String startDate = "Select Start";
+  String endDate = "Select End";
+
+  DateTimeRange? selectedDateRange;
+  void setDateRange(DateTimeRange range) {
+    selectedDateRange = range;
+    startDate = DateFormat('dd MMM yyyy').format(range.start);
+    endDate = DateFormat('dd MMM yyyy').format(range.end);
+    emit(DateRangeUpdatedState()); // تأكد من وجود هذه الحالة
+  }
+  void clearDateRange() {
+    selectedDateRange = null;
+    startDate = "Select Start";
+    endDate = "Select End";
+    emit(DateRangeClearedState()); // تأكد من إضافة الحالة
+  }
+
+  // تحقق إذا كانت القيم كلها فارغة (أي القيم الافتراضية)
+  bool get isDefault => selectedButton.isEmpty && selectedButton2.isEmpty && startDate == "Select Start" && endDate == "Select End";
+
+  // اختيار زر أول
+  void selectButton(String text) {
+    if (selectedButton != text) {
+      selectedButton = text;
+      emit(ButtonChangeState());  // تحديث الـ UI بعد التغيير
+    }
+  }
+
+  void selectButton2(String text) {
+    if (selectedButton2 != text) {
+      selectedButton2 = text;
+      emit(ButtonChangeState());  // تحديث الـ UI بعد التغيير
+    }
+  }
+
+
+  // تغيير حالة الـ BottomSheet
+  void changeBottomSheetState({required bool isShow}) {
+    if (isBottomSheetShown != isShow) {  // تأكد من عدم تحديث الحالة بدون داعي
+      isBottomSheetShown = isShow;
+      emit(ButtonChangeState());  // إرسال حالة جديدة لإعادة بناء الواجهة
+    }
+  }
+
+  // إعادة تعيين الفلتر الأول
+  void resetFilter() {
+    if (selectedButton.isNotEmpty) {  // تحقق من أنه ليس فارغًا
+      selectedButton = '';  // إعادة التعيين إلى قيمة فارغة
+      emit(AppChangeFilterState());
+    }
+  }
+
+  // إعادة تعيين الفلتر الثاني
+  void resetFilter2() {
+    if (selectedButton2.isNotEmpty) {  // تحقق من أنه ليس فارغًا
+      selectedButton2 = '';  // إعادة التعيين إلى قيمة فارغة
+      emit(AppChangeFilterState());
+    }
+  }
+
+
 
 
 
@@ -37,6 +102,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppHealthUpdatedState());
   }
 
+  bool isBottomSheetShown = false;
 
   var emailController = TextEditingController(text: 'acc.motharwat@gmail.com');
   var passwordController = TextEditingController(text: '************');

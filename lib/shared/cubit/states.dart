@@ -14,6 +14,14 @@ class AppUpdateTimeState extends AppStates{}
 
 class AppHealthUpdatedState extends AppStates{}
 
+class BottomSheetShownState extends AppStates{}
+
+class ButtonChangeState extends AppStates{}
+class ButtonResetState extends AppStates{}
+class AppChangeFilterState extends AppStates{}
+class DateRangeUpdatedState extends AppStates{}
+class DateRangeClearedState extends AppStates{}
+
 
 
 

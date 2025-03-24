@@ -24,6 +24,9 @@ dependencies:
   flutter_datetime_picker_plus: ^2.1.0
   equatable: ^2.0.7
   fl_chart: ^0.70.2
+  searchable_listview: ^2.16.0
+  string_similarity: ^2.0.0
+  syncfusion_flutter_datepicker: ^28.2.12
 
 dev_dependencies:
   flutter_test:

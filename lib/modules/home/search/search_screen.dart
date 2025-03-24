@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:string_similarity/string_similarity.dart';
 
 import '../../../shared/components/components.dart';
 import '../plant details/plant_details_screen.dart';
@@ -38,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
 
     if (query.isEmpty) {
       setState(() {
-        searchResults = List.from(widget.items); // إعادة كل العناصر إذا كان البحث فارغًا
+        searchResults = List.from(widget.items);
         isLoading = false;
       });
       return;
@@ -46,28 +47,20 @@ class _SearchPageState extends State<SearchPage> {
 
     setState(() {
       searchResults = widget.items.where((item) {
-        String floorText = "floor ${item["floor"]}".toLowerCase();
-        String cellText = "cell ${item["cell"]}".toLowerCase();
-        String combinedText = "$floorText $cellText";
+        String floorText = "floor${item["floor"]}".toLowerCase().replaceAll(" ", "");
+        String cellText = "cell${item["cell"]}".toLowerCase().replaceAll(" ", "");
+        String combinedText = "$floorText$cellText";
 
-        // دالة تقسيم النصوص إلى أجزاء بدون مسافات
-        List<String> splitWords(String text) {
-          return RegExp(r'[a-zA-Z]+|\d+')
-              .allMatches(text.toLowerCase())
-              .map((match) => match.group(0)!)
-              .toList();
-        }
+        String cleanedQuery = query.toLowerCase().replaceAll(" ", "");
 
-        List<String> queryWords = splitWords(query);
-        List<String> itemWords = splitWords(combinedText);
-
-        // تحقق إذا كانت جميع الكلمات في البحث موجودة في العناصر
-        return queryWords.every((word) => itemWords.any((itemWord) => itemWord.contains(word)));
+        return combinedText.contains(cleanedQuery);
       }).toList();
 
       isLoading = false;
     });
   }
+
+
 
   Widget _buildLoadingSkeleton() {
     return Padding(
