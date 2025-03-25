@@ -1,10 +1,10 @@
-import 'package:agre_lens_app/models/settings/settings_item.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../models/settings/settings_item.dart';
 
 class SettingsCard extends StatelessWidget {
   final List<SettingsItem> items;
+
   const SettingsCard({super.key, required this.items});
 
   @override
@@ -16,23 +16,36 @@ class SettingsCard extends StatelessWidget {
       ),
       child: Column(
         children: items.map((item) {
-          return ListTile(
-            title: Text(
-              item.title,
-              style: GoogleFonts.openSans(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => item.screen,
+          return Column(
+            children: [
+              ListTile(
+                title: Text(
+                  item.title,
+                  style: GoogleFonts.openSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              );
-            },
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => item.screen,
+                    ),
+                  );
+                },
+              ),
+              if (item != items.last)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: const Divider(
+                    thickness: 1,
+                    height: 0,
+                    color: Color(0xFFAAAAAA),
+                  ),
+                ),
+            ],
           );
         }).toList(),
       ),

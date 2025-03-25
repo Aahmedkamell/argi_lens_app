@@ -27,6 +27,7 @@ dependencies:
   searchable_listview: ^2.16.0
   string_similarity: ^2.0.0
   syncfusion_flutter_datepicker: ^28.2.12
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:
