@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -25,14 +27,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // return BlocProvider(
-    //   create: (context) => AppCubit(),
-    //   child: MaterialApp(
-    //     theme: ThemeData(),
-    //     debugShowCheckedModeBanner: false,
-    //     home: SplashScreen(),
-    //   ),
-
+   /* return BlocProvider(
+    create: (context) => AppCubit(),
+    child: MaterialApp(
+       theme: ThemeData(),
+       debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
+      );
+*/
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFFEF7FF)
