@@ -49,7 +49,7 @@ class HelpCenterScreen extends StatelessWidget {
                       itemCount: faqs.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 10),
+                          padding: const EdgeInsets.all(10),
                           child: Text(
                             "${index + 1}. ${faqs[index]}",
                             style: GoogleFonts.poppins(
