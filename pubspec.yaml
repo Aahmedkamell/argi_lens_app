@@ -28,6 +28,7 @@ dependencies:
   string_similarity: ^2.0.0
   syncfusion_flutter_datepicker: ^28.2.12
   font_awesome_flutter: ^10.8.0
+  in_app_review: ^2.0.10
 
 dev_dependencies:
   flutter_test:
