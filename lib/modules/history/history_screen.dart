@@ -27,7 +27,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime(now.year - 5),
-      lastDate: DateTime(now.year + 5),
+      lastDate: now, // منع اختيار تواريخ في المستقبل
       initialDateRange: cubit.selectedDateRange,
       builder: (context, child) {
         return Theme(
@@ -85,7 +85,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
 
     if (picked != null) {
-      cubit.setDateRange(picked); // تحديث التاريخ في Cubit
+      cubit.setDateRange(picked);
     }
   }
 

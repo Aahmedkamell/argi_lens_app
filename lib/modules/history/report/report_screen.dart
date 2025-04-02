@@ -29,10 +29,11 @@ class _ReportScreenState extends State<ReportScreen> {
   TimeOfDay? selectedTime;
 
   Future<void> _pickDateRange() async {
+    DateTime now = DateTime.now();
     DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      lastDate: now,
       initialEntryMode: DatePickerEntryMode.input, // يتيح تغيير السنة بسهولة
       helpText: "Select a Date Range", // نص توضيحي في الأعلى
       builder: (context, child) {
@@ -71,7 +72,7 @@ class _ReportScreenState extends State<ReportScreen> {
               contentTextStyle: TextStyle(
                 color: Colors.green.shade800, // ✅ لون باقي النصوص داخل النافذة
               ),
-            ),// لون خلفية الـ DatePicker
+            ), // لون خلفية الـ DatePicker
             buttonTheme: ButtonThemeData(
               buttonColor: Colors.green, // لون الأزرار القديمة (للتوافق مع إصدارات قديمة)
               textTheme: ButtonTextTheme.primary,
@@ -105,7 +106,6 @@ class _ReportScreenState extends State<ReportScreen> {
             child: child,
           )
               : SizedBox.shrink(),
-          // يعرض الواجهة بحجمها الطبيعي
         );
       },
     );

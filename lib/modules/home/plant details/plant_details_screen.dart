@@ -114,6 +114,7 @@ class PlantDetailsScreen extends StatelessWidget {
                           bodyColor: Color(0xFF484C52),
                         ),
                       ),
+                      SizedBox(height: 15),
                     ],
                   ),
                 ),
