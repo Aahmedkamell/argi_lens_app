@@ -303,22 +303,23 @@ class _ReportScreenState extends State<ReportScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(height: 20,),
+                        // SizedBox(height: 20,),
                         SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  _buildDateRangePicker(
-                                      context, selectedDateRange, _pickDateRange),
-                                  SizedBox(width: 10),
-                                  _buildTimePicker(context, selectedTime, _pickTime),
-
-                                ],
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.start,
+                              //   children: [
+                              //     _buildDateRangePicker(
+                              //         context, selectedDateRange, _pickDateRange),
+                              //     SizedBox(width: 10),
+                              //     _buildTimePicker(context, selectedTime, _pickTime),
+                              //
+                              //   ],
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: Column(
@@ -369,164 +370,156 @@ class _ReportScreenState extends State<ReportScreen> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 44,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
-                                        // تدرج من الرمادي للأبيض
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        stops: [0.2, 1.0]
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.15),
-                                        // الظل الخارجي
-                                        offset: Offset(4, 4),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Average",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        "75%",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 44,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
-                                        // تدرج من الرمادي للأبيض
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        stops: [0.2, 1.0]
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.15),
-                                        // الظل الخارجي
-                                        offset: Offset(4, 4),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Maximum",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        "95%",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 44,
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
-                                        // تدرج من الرمادي للأبيض
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        stops: [0.2, 1.0]
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.15),
-                                        // الظل الخارجي
-                                        offset: Offset(4, 4),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Minimum",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        "50%",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorManager.greenColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(10.0),
+                              //   child: Container(
+                              //     width: MediaQuery.of(context).size.width,
+                              //     height: 44,
+                              //     padding: EdgeInsets.symmetric(horizontal: 10),
+                              //     decoration: BoxDecoration(
+                              //       gradient: LinearGradient(
+                              //           colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
+                              //           // تدرج من الرمادي للأبيض
+                              //           begin: Alignment.topCenter,
+                              //           end: Alignment.bottomCenter,
+                              //           stops: [0.2, 1.0]
+                              //       ),
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: Colors.black.withOpacity(0.15),
+                              //           // الظل الخارجي
+                              //           offset: Offset(4, 4),
+                              //           blurRadius: 4,
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         Text(
+                              //           "Average",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //         Text(
+                              //           "75%",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(10.0),
+                              //   child: Container(
+                              //     width: MediaQuery.of(context).size.width,
+                              //     height: 44,
+                              //     padding: EdgeInsets.symmetric(horizontal: 10),
+                              //     decoration: BoxDecoration(
+                              //       gradient: LinearGradient(
+                              //           colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
+                              //           // تدرج من الرمادي للأبيض
+                              //           begin: Alignment.topCenter,
+                              //           end: Alignment.bottomCenter,
+                              //           stops: [0.2, 1.0]
+                              //       ),
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: Colors.black.withOpacity(0.15),
+                              //           // الظل الخارجي
+                              //           offset: Offset(4, 4),
+                              //           blurRadius: 4,
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         Text(
+                              //           "Maximum",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //         Text(
+                              //           "95%",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(10.0),
+                              //   child: Container(
+                              //     width: MediaQuery.of(context).size.width,
+                              //     height: 44,
+                              //     padding: EdgeInsets.symmetric(horizontal: 10),
+                              //     decoration: BoxDecoration(
+                              //       gradient: LinearGradient(
+                              //           colors: [Color(0xFFE0E0E0), Color(0xFFF5F5F5)],
+                              //           // تدرج من الرمادي للأبيض
+                              //           begin: Alignment.topCenter,
+                              //           end: Alignment.bottomCenter,
+                              //           stops: [0.2, 1.0]
+                              //       ),
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: Colors.black.withOpacity(0.15),
+                              //           // الظل الخارجي
+                              //           offset: Offset(4, 4),
+                              //           blurRadius: 4,
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         Text(
+                              //           "Minimum",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //         Text(
+                              //           "50%",
+                              //           style: GoogleFonts.poppins(
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.w500,
+                              //             color: ColorManager.greenColor,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: detailesText(
                                   headColor: Color(0xFF484C52),
                                   headText: 'Status:',
-                                  bodyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet, in. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.',
+                                  bodyText: 'Water :  20%\nPH :  63%\nDHT :  94%'
                                 ),
                               ),
                               SizedBox(height: 15,),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: detailesText(
-                                  headColor: Color(0xFF484C52),
-                                  headText: 'Recommendation:',
-                                  bodyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet, in. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.',
-                                ),
-                              ),
                               SizedBox(height: 15,),
                             ],
                           ),
