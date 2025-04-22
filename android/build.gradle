@@ -1,3 +1,16 @@
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0' // أو اللي عندك
+        classpath 'com.google.gms:google-services:4.3.15' // ✅ ده المهم لإصلاح المشكلة
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -8,10 +21,9 @@ allprojects {
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-   // project.evaluationDependsOn(rootProject.name)
+    // project.evaluationDependsOn(rootProject.name)
 }
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
-

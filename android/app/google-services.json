@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706404102505",
+    "project_id": "agri-lens",
+    "storage_bucket": "agri-lens.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706404102505:android:6c17163f7f1135822d0df8",
+        "android_client_info": {
+          "package_name": "com.agri.lens"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6iUxJudOQJVdzPR1TZWpknd2afafbIQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

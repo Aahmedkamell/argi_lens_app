@@ -22,6 +22,7 @@ Widget defaultFormField({
   Function(String)? onChanged,
   Function()? onTap,
   String? labelText,
+  String? errorText,
   IconData? prefixIcon,
   Widget? suffixIcon,
   VoidCallback? suffixPressed,
@@ -47,6 +48,7 @@ Widget defaultFormField({
         selectionControls: MaterialTextSelectionControls(),
         validator: validator,
         decoration: InputDecoration(
+          errorText: errorText,
           errorMaxLines: 2,
           labelText: labelText,
           labelStyle: TextStyle(

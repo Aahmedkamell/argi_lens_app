@@ -1,9 +1,11 @@
 import 'package:agre_lens_app/layout/app_layout.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../shared/components/components.dart';
+import '../home/home_screen.dart';
 import 'forget_password_screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,13 +32,61 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
   }
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool isPasswordVisible = false;
   var formkey = GlobalKey<FormState>();
   var scafoldkey = GlobalKey<ScaffoldState>();
+  bool isLoading = false;
 
 
+  Future<void> loginUser(BuildContext context) async {
+    if (formkey.currentState?.validate() ?? false) {
+      setState(() {
+        isLoading = true; // عرض مؤشر التحميل
+      });
+
+      try {
+        // محاولة تسجيل الدخول
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+        // هنا تم تسجيل الدخول بنجاح
+        print("Login successful: ${userCredential.user?.email}");
+
+        // إخفاء مؤشر التحميل والانتقال للصفحة الرئيسية
+        setState(() {
+          isLoading = false;
+        });
+
+        // الانتقال للصفحة الرئيسية بعد التسجيل
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AppLayout()),
+        );
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          isLoading = false; // إخفاء مؤشر التحميل في حالة الخطأ
+        });
+
+        // التعامل مع الأخطاء
+        if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('The email or password is incorrect.')),
+          );
+        } else {
+          // Display the message "The email or password is incorrect" for all other errors
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('The email or password is incorrect.')),
+          );
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,18 +151,19 @@ class _LoginPageState extends State<LoginPage> {
                       defaultFormField(
                         context: context,
                         controller: emailController,
-                          labelText: 'Email',
-                          type: TextInputType.emailAddress,
-                          validator: (String? value) {
+                        labelText: 'Email',
+                        type: TextInputType.emailAddress,
+                        validator: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
                           if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
-                          return null;
+                          return null; // متابعه للـ validator الأساسي
                         },
                       ),
+
                       defaultFormField(
                         context: context,
                         controller: passwordController,
@@ -134,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
                           }
-                          return null;
+                          return null; // متابعه للـ validator الأساسي
                         },
                       ),
                       Row(
@@ -160,25 +211,23 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 20,
                       ),
-                      defaultButton(
-                        onTap: (){
-                          if (formkey.currentState!.validate()){
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=> AppLayout())
-                            );
-                          }
-                        },
-                          colorButton: ColorManager.greenColor,
-                          textColorButton: Colors.white,
-                          text: Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                      isLoading
+                          ? Center(child: CircularProgressIndicator(color: ColorManager.greenColor,))
+                          :  defaultButton(
+                                onTap: (){
+                                  loginUser(context);
+                                },
+                                colorButton: ColorManager.greenColor,
+                                textColorButton: Colors.white,
+                                text: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
                             ),
-                          )
-                      ),
                       SizedBox(height: 25,),
                       Center(
                         child: Text(
@@ -221,7 +270,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-
-
   }
 }
+
+

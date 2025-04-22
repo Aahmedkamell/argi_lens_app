@@ -2,9 +2,12 @@ import 'package:agre_lens_app/modules/splash/splash_screen.dart';
 import 'package:agre_lens_app/shared/bloc_observer.dart';
 import 'package:agre_lens_app/shared/cubit/cubit.dart';
 import 'package:agre_lens_app/shared/network/remote/dio_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'firebase_options.dart';
 
 
 
@@ -14,6 +17,9 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
   ));
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   runApp(
@@ -27,15 +33,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   /* return BlocProvider(
-    create: (context) => AppCubit(),
-    child: MaterialApp(
-       theme: ThemeData(),
-       debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-      ),
-      );
-*/
+
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFFEF7FF)
