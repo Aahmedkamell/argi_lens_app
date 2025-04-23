@@ -7,16 +7,33 @@ import 'package:agre_lens_app/modules/settings/notifications_screen.dart';
 import 'package:agre_lens_app/modules/settings/privacy_policy_screen.dart';
 import 'package:agre_lens_app/modules/settings/termes_of_use_screen.dart';
 import 'package:agre_lens_app/modules/login/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
+
+
+  Future<void> signOutUser() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    try {
+      await auth.signOut();
+      await googleSignIn.signOut();
+      print('تم تسجيل الخروج بنجاح');
+    } catch (e) {
+      print('حدث خطأ أثناء تسجيل الخروج: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +88,8 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async{
+                    await signOutUser();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

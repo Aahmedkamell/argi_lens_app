@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "706404102505",
+    "firebase_url": "https://agri-lens-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "agri-lens",
     "storage_bucket": "agri-lens.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.agri.lens"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "706404102505-rntdasn4pug6luiisalnkau1nlv4rpev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agri.lens",
+            "certificate_hash": "888a0b4ced0dc83833dce49614fc640fafec28c2"
+          }
+        },
+        {
+          "client_id": "706404102505-4id1va8f9td3d7h1ef3ou60q1uda8he9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC6iUxJudOQJVdzPR1TZWpknd2afafbIQY"
@@ -20,7 +34,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706404102505-4id1va8f9td3d7h1ef3ou60q1uda8he9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "706404102505-09jhhro46l9vu2siov1v93v6105ti83l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.agri.lens"
+              }
+            }
+          ]
         }
       }
     }
