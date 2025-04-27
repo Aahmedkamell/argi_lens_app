@@ -643,7 +643,7 @@ Widget historyItemBuilder(BuildContext context) {
   );
 }
 
-Widget sensorReading ({
+Widget sensorReading1 ({
   required String? sensorName,
   required int? sensorStats,
 })=> Container(
@@ -664,7 +664,7 @@ Widget sensorReading ({
   child: Padding(
     padding: const EdgeInsets.symmetric(
         vertical: 9,
-        horizontal: 22
+        horizontal: 16
     ),
     child: Column(
       children: [
@@ -680,6 +680,51 @@ Widget sensorReading ({
           '$sensorStats%',
           style: GoogleFonts.poppins(
               color: getColorOfStats(sensorStats!),
+              fontSize: 18,
+              fontWeight: FontWeight.w600
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+Widget sensorReading2 ({
+  required String? sensorName,
+  required int? sensorStats,
+})=> Container(
+  height: 72,
+  width: 104,
+  decoration: BoxDecoration(
+    color: Color(0xFFFAFAFA),
+    borderRadius: BorderRadius.circular(10),
+    border: Border.all(color: getColorOfTempStats(sensorStats!)),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.3),
+        blurRadius: 4,
+        offset: Offset(0, 4),
+      ),
+    ],
+  ),
+  child: Padding(
+    padding: const EdgeInsets.symmetric(
+        vertical: 9,
+        horizontal: 16
+    ),
+    child: Column(
+      children: [
+        Text(
+          '$sensorName',
+          style: TextStyle(
+              color: Color(0xFF414042),
+              fontSize: 18,
+              fontWeight: FontWeight.w600
+          ),
+        ),
+        Text(
+          '$sensorStats°',
+          style: GoogleFonts.poppins(
+              color: getColorOfTempStats(sensorStats!),
               fontSize: 18,
               fontWeight: FontWeight.w600
           ),
@@ -750,6 +795,16 @@ Color getColorOfStats(int stats) {
     return ColorManager.yellowColor;  }
   else {
     return ColorManager.greenColor;
+  }
+}
+
+Color getColorOfTempStats(int stats) {
+  if (stats <= 30 && stats >= 15) {
+    return ColorManager.greenColor;
+  } else if (stats <= 35 && stats >= 10) {
+    return ColorManager.yellowColor;  }
+  else{
+    return ColorManager.redColor;
   }
 }
 

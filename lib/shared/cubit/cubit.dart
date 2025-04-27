@@ -7,6 +7,7 @@ import 'package:agre_lens_app/modules/settings/settings_screen.dart';
 import 'package:agre_lens_app/modules/timer/timer_screen.dart';
 import 'package:agre_lens_app/shared/cubit/states.dart';
 import 'package:agre_lens_app/shared/styles/colors.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,7 @@ class AppCubit extends Cubit<AppStates> {
     hourController = FixedExtentScrollController(initialItem: selectedHour);
     minuteController = FixedExtentScrollController(initialItem: selectedMinute);
     _init();
+    listenToFarmData();
   }
 
   void _init() async {
@@ -27,6 +29,40 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   static AppCubit get(BuildContext context) => BlocProvider.of(context);
+
+
+  //firebase real time reading
+
+  final DatabaseReference farmRef = FirebaseDatabase.instance.ref('farm');
+
+  String soilMoisture = '';
+  String temp = '';
+
+  void listenToFarmData() {
+    farmRef.onValue.listen((event) {
+      var data = event.snapshot.value as Map<dynamic, dynamic>?;
+
+      if (data != null) {
+        // قراءة الثلاث قيم
+        int soil1 = int.tryParse(data['SoilMoisture1'].toString()) ?? 0;
+        int soil2 = int.tryParse(data['SoilMoisture2'].toString()) ?? 0;
+        int soil3 = int.tryParse(data['SoilMoisture3'].toString()) ?? 0;
+
+        // نحسب الافرج
+        int avgSoilMoisture = ((soil1 + soil2 + soil3) / 3).round();
+
+        // نحط الافرج
+        soilMoisture = avgSoilMoisture.toString();
+
+        temp = data['temp'].toString(); // عادي temp زي ما هي
+
+        emit(FarmDataUpdated());
+      }
+    });
+  }
+
+
+  //
 
   String selectedButton = '';
   String selectedButton2 = '';
