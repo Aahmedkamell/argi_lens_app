@@ -15,6 +15,7 @@ import 'all plants/all_plant_screen.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -148,11 +149,9 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Expanded(child: sensorReading(sensorName: 'Water', sensorStats: 20)),
+                      Expanded(child: sensorReading1(sensorName: 'Soil Moisture', sensorStats: int.tryParse(cubit.soilMoisture) ?? 0,)),
                       SizedBox(width: 10,),
-                      Expanded(child: sensorReading(sensorName: 'PH', sensorStats: 63)),
-                      SizedBox(width: 10,),
-                      Expanded(child: sensorReading(sensorName: 'DHT', sensorStats: 94)),
+                      Expanded(child: sensorReading2(sensorName: 'DHT', sensorStats: int.tryParse(cubit.temp) ?? 0)),
                     ],
                   ),
                 )

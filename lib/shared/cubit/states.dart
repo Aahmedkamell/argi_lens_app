@@ -22,6 +22,20 @@ class AppChangeFilterState extends AppStates{}
 class DateRangeUpdatedState extends AppStates{}
 class DateRangeClearedState extends AppStates{}
 
+class FarmLoading extends AppStates {}
+
+class FarmDataUpdated extends AppStates {}
+
+class FarmLoaded extends AppStates {
+  final Map<String, dynamic> farmData;
+  FarmLoaded(this.farmData);
+}
+
+class FarmError extends AppStates {
+  final String message;
+  FarmError(this.message);
+}
+
 
 
 
