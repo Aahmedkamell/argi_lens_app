@@ -21,13 +21,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
   DateTimeRange? selectedDateRange;
   String startDate = "Select Start";
   String endDate = "Select End";
+  var scafoldkey = GlobalKey<ScaffoldState>();
+  var formkey = GlobalKey<FormState>();
 
   Future<void> _pickDateRange() async {
     DateTime now = DateTime.now();
     DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime(now.year - 5),
-      lastDate: DateTime(now.year + 5),
+      lastDate: now, // منع اختيار تواريخ في المستقبل
       initialDateRange: cubit.selectedDateRange,
       builder: (context, child) {
         return Theme(
@@ -85,7 +87,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
 
     if (picked != null) {
-      cubit.setDateRange(picked); // تحديث التاريخ في Cubit
+      cubit.setDateRange(picked);
     }
   }
 
@@ -184,6 +186,37 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ],
                 ),
               ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                // هنا بنعرض الـ BottomSheet
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'أهلاً وسهلاً!',
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'ده محتوى الـ BottomSheet، تقدر تضيف فيه أي حاجة.',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              elevation: 5,
+              shape: CircleBorder(),
+              backgroundColor: ColorManager.greenColor,
+              child: Icon(Icons.add,color: Colors.white,size: 32,),
             ),
           ),
         );

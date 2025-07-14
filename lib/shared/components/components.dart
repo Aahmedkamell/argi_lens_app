@@ -22,6 +22,7 @@ Widget defaultFormField({
   Function(String)? onChanged,
   Function()? onTap,
   String? labelText,
+  String? errorText,
   IconData? prefixIcon,
   Widget? suffixIcon,
   VoidCallback? suffixPressed,
@@ -47,6 +48,7 @@ Widget defaultFormField({
         selectionControls: MaterialTextSelectionControls(),
         validator: validator,
         decoration: InputDecoration(
+          errorText: errorText,
           errorMaxLines: 2,
           labelText: labelText,
           labelStyle: TextStyle(
@@ -142,10 +144,10 @@ Widget defaultButton({
   ),
 );
 
-List<Map<String, dynamic>> plantItems = List.generate(11, (index) => {
-  "floor": "Floor ${index + 1}",
+List<Map<String, dynamic>> plantItems = List.generate(3, (index) => {
+  "floor": "Floor 1",
   "cell": "Cell ${index + 1}",
-  "healthPercentage": min(index * 10, 100),
+  "healthPercentage": min(index * 65 + 10, 100),
 });
 
 Widget buildHealthPlantItem({
@@ -249,12 +251,12 @@ Widget healthPlantBuilder()=>BuildCondition(
       padding: EdgeInsets.only(right: 10),
       itemBuilder: (context, index)=> buildHealthPlantItem(
         context: context,
-        floor: "Floor ${index + 1}",
+        floor: "Floor 1",
         cell: "Cell ${index + 1}",
-        healthPercentage: min(index * 10, 100),
+        healthPercentage: min(index * 65 + 10, 100),
       ),
       separatorBuilder: (context, index)=> SizedBox(width: 15,),
-      itemCount: 11),
+      itemCount: 3),
   fallback: (context)=> Center(child: CircularProgressIndicator(
     color: ColorManager.greenColor,
   )),
@@ -343,7 +345,7 @@ Widget floorPlantBuilder()=>BuildCondition(
         floorNum: index+1
       ),
       separatorBuilder: (context, index)=> SizedBox(width: 15,),
-      itemCount: 5),
+      itemCount: 1),
   fallback: (context)=> Center(child: CircularProgressIndicator(
     color: ColorManager.greenColor,
   )),
@@ -463,14 +465,14 @@ Widget allHealthPlantBuilder() => BuildCondition(
     scrollDirection: Axis.vertical,
     physics: BouncingScrollPhysics(),
     padding: EdgeInsets.only(right: 10),
-    itemCount: 13,
+    itemCount: 5,
     itemBuilder: (context, index) {
-      if (index == 12 || index == 0) {
+      if (index == 4 || index == 0) {
         return SizedBox(height: 20);
       }
       return buildAllHealthPlantItem(
         context: context,
-        floor: 'Floor $index',
+        floor: 'Floor 1',
         cell: 'Cell $index',
         healthPercentage: min((index-1) * 10, 100),
       );

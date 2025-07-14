@@ -45,22 +45,20 @@ class _SearchPageState extends State<SearchPage> {
       return;
     }
 
+    List<String> queryParts = query.toLowerCase().split(" ").where((part) => part.isNotEmpty).toList();
+
     setState(() {
       searchResults = widget.items.where((item) {
-        String floorText = "floor${item["floor"]}".toLowerCase().replaceAll(" ", "");
-        String cellText = "cell${item["cell"]}".toLowerCase().replaceAll(" ", "");
-        String combinedText = "$floorText$cellText";
+        String floorText = "floor${item["floor"]}".toLowerCase();
+        String cellText = "cell${item["cell"]}".toLowerCase();
 
-        String cleanedQuery = query.toLowerCase().replaceAll(" ", "");
-
-        return combinedText.contains(cleanedQuery);
+        return queryParts.every((part) =>
+        floorText.contains(part) || cellText.contains(part));
       }).toList();
 
       isLoading = false;
     });
   }
-
-
 
   Widget _buildLoadingSkeleton() {
     return Padding(
@@ -198,7 +196,7 @@ class _SearchPageState extends State<SearchPage> {
             Expanded(
               child: isLoading
                   ? ListView.builder(
-                itemCount: 5,
+                itemCount: 3,
                 itemBuilder: (context, index) => _buildLoadingSkeleton(),
               )
                   : searchResults.isEmpty

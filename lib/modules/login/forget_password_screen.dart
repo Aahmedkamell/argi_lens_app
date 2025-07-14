@@ -1,4 +1,5 @@
 import 'package:agre_lens_app/modules/login/verify_account_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../layout/app_layout.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
+import 'login_screen.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -15,9 +17,39 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  var emailController = TextEditingController();
+  final _emailController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   var scafoldkey = GlobalKey<ScaffoldState>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future passwordReset()async{
+    try{
+      FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('If this email is registered, a password reset link will be sent to you.'),
+            backgroundColor: ColorManager.greenColor,
+        )
+      );
+      await Future.delayed(Duration(seconds: 1));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+
+    }on FirebaseAuthException catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message.toString()))
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +123,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  'No worries! Enter your email address below and we will send you a code to reset password.',
+                  'No worries! Enter your email address below and we will send you a password reset link.',
                   style: TextStyle(
                     color: Color(0xFF000113),
                     fontSize: 14,
@@ -111,7 +143,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     children: [
                       defaultFormField(
                         context: context,
-                        controller: emailController,
+                        controller: _emailController,
                         labelText: 'Email',
                         type: TextInputType.emailAddress,
                         validator: (String? value) {
@@ -127,16 +159,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       SizedBox(height: 50,),
                       defaultButton(
                           onTap: (){
-                            if (formkey.currentState!.validate()){
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context)=> VerifyAccount(emailText: emailController.text))
-                              );
+                            if(formkey.currentState!.validate()){
+                              passwordReset();
                             }
                           },
                           colorButton: ColorManager.greenColor,
                           textColorButton: Colors.white,
                           text: Text(
-                            'Send Reset Instruction',
+                            'Send Password Reset Link',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
